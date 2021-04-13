@@ -20,13 +20,6 @@ class admin extends BaseController
         return view('admin/inbox', $data);
     }
 
-    public function output()
-    {
-        $data = [
-            'title' => 'Output | Controling Pallet'
-        ];
-        return view('admin/output', $data);
-    }
 
 
     public function input()

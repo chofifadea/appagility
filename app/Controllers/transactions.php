@@ -7,29 +7,42 @@ use App\Models\TransactionsModel;
 class transactions extends BaseController
 {
     protected $transactionsModel;
-    public function __construct()
-
-    {
-        $this->transactionsModel = new TransactionsModel();
-    }
 
     public function index()
     {
-        $transactions = $this->transactionsModel->findAll();
+        $transactions = new TransactionsModel();
 
         $data = [
             'title' => 'Transaction | Controling Pallet',
-            'transaction' => $transactions
+            'tampildata' => $transactions->tampildata()->getResult()
         ];
-
-        // $transactionsModel = new \App\Models\TransactionsModel();
-
-
         return view('admin/transaction', $data);
     }
 
-    public function save()
+    public function output()
     {
-        dd($this->request->getVar());
+        helper('form');
+        $data = [
+            'title' => 'Output | Controling Pallet'
+        ];
+        return view('admin/output', $data);
+    }
+
+
+    public function simpandata()
+    {
+        $data = [
+            'pallet_name' => $this->request->getpost('pallet_name'),
+            'information' => $this->request->getpost('information'),
+            'site' => $this->request->getpost('site'),
+            'quantity' => $this->request->getpost('quantity')
+        ];
+        $transactions = new TransactionsModel();
+
+        $simpan = $transactions->simpan($data);
+
+        if ($simpan) {
+            return redirect()->to('/transactions/index');
+        }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\transactions;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -32,7 +34,13 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+// $routes->get('/', 'admin::index');
+// $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 
+// CRUD Transactions 
+$routes->get('transactions', 'transactions::index');
+$routes->get('output', 'admin::output');
+$routes->post('transactions-save', 'transactions::save');
 
 /*
  * --------------------------------------------------------------------

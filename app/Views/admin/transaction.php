@@ -26,13 +26,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($transaction as $transaction) : ?>
+                        <?php foreach ($tampildata as $row) : ?>
                             <tr>
-                                <td><?= $transaction['pallet_name']; ?></td>
-                                <td><?= $transaction['information']; ?></td>
-                                <td><?= $transaction['site']; ?></td>
-                                <td><?= $transaction['quantity']; ?></td>
-                                <td><?= $transaction['created_at']; ?></td>
+                                <td><?= $row->pallet_name ?></td>
+                                <td><?= $row->information ?></td>
+                                <td><?= $row->site ?></td>
+                                <td><?= $row->quantity ?></td>
+                                <td><?= $row->created_at ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

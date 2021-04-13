@@ -33,7 +33,7 @@
 
     <!-- Nav Item - Output -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/admin/output'); ?>">
+        <a class="nav-link" href="<?= base_url('/transactions/output'); ?>">
             <i class="far fa-arrow-alt-to-top"></i>
             <span>Output</span></a>
     </li>
