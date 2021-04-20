@@ -6,6 +6,16 @@ use CodeIgniter\Model;
 
 class TransactionsModel extends Model
 {
+    protected $table = 'transactions';
+    protected $primaryKey = 'id';
+    protected $allowedFields = [
+        'pallet_name',
+        'information',
+        'site',
+        'quantity'
+
+    ];
+
     function __construct()
 
     {

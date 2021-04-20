@@ -32,10 +32,10 @@ class transactions extends BaseController
     public function simpandata()
     {
         $data = [
-            'pallet_name' => $this->request->getpost('pallet_name'),
-            'information' => $this->request->getpost('information'),
-            'site' => $this->request->getpost('site'),
-            'quantity' => $this->request->getpost('quantity')
+            'pallet_name' => $this->request->getPost('pallet_name'),
+            'information' => $this->request->getPost('information'),
+            'site' => $this->request->getPost('site'),
+            'quantity' => $this->request->getPost('quantity')
         ];
         $transactions = new TransactionsModel();
 

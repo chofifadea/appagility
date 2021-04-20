@@ -18,6 +18,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Pallet Name</th>
                             <th>Information</th>
                             <th>Site</th>
@@ -28,6 +29,7 @@
                     <tbody>
                         <?php foreach ($tampildata as $row) : ?>
                             <tr>
+                                <td><?= $row->id ?></td>
                                 <td><?= $row->pallet_name ?></td>
                                 <td><?= $row->information ?></td>
                                 <td><?= $row->site ?></td>
