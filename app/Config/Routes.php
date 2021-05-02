@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Controllers\transactions;
+use CodeIgniter\Router\Router;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -39,8 +40,9 @@ $routes->get('/', 'Home::index');
 
 // CRUD Transactions 
 $routes->get('transactions', 'transactions::index');
-$routes->get('output', 'admin::output');
 $routes->post('transactions-save', 'transactions::save');
+$routes->get('input', 'transactions::input');
+$routes->post('transactions-input', 'transactions::simpandata');
 
 /*
  * --------------------------------------------------------------------

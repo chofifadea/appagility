@@ -27,9 +27,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $i = 1; ?>
                         <?php foreach ($tampildata as $row) : ?>
                             <tr>
-                                <td><?= $row->id ?></td>
+                                <td><?= $row->id = $i++ ?></td>
                                 <td><?= $row->pallet_name ?></td>
                                 <td><?= $row->information ?></td>
                                 <td><?= $row->site ?></td>

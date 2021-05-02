@@ -28,6 +28,14 @@ class transactions extends BaseController
         return view('admin/output', $data);
     }
 
+    public function input()
+    {
+        $data = [
+            'title' => 'Input | Controling Pallet'
+        ];
+        return view('admin/input', $data);
+    }
+
 
     public function simpandata()
     {
@@ -45,4 +53,21 @@ class transactions extends BaseController
             return redirect()->to('/transactions/index');
         }
     }
+
+    // public function simpandata_input()
+    // {
+    //     $data = [
+    //         'pallet_name' => $this->request->getPost('pallet_name'),
+    //         'information' => $this->request->getPost('information'),
+    //         'site' => $this->request->getPost('site'),
+    //         'quantity' => $this->request->getPost('quantity')
+    //     ];
+    //     $transactions = new TransactionsModel();
+
+    //     $simpan = $transactions->simpan($data);
+
+    //     if ($simpan) {
+    //         return redirect()->to('/transactions/index');
+    //     }
+    // }
 }

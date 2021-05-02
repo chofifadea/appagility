@@ -24,7 +24,7 @@
     <!-- Nav Item - inbox -->
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/admin/inbox'); ?>">
-            <i class="far fa-arrow-alt-to-bottom"></i>
+            <i class="fas fa-boxes"></i>
             <span>Inbox</span></a>
     </li>
 
@@ -34,7 +34,7 @@
     <!-- Nav Item - Output -->
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/transactions/output'); ?>">
-            <i class="far fa-arrow-alt-to-top"></i>
+            <i class="fas fa-shipping-fast"></i>
             <span>Output</span></a>
     </li>
 
@@ -43,7 +43,7 @@
 
     <!-- Nav Item - Input -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('admin/input'); ?>">
+        <a class="nav-link" href="<?= base_url('transactions/input'); ?>">
             <i class="fas fa-layer-group"></i>
             <span>Input</span></a>
     </li>
@@ -65,5 +65,14 @@
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+    <!-- Nav Item - User Guide -->
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/transactions'); ?>">
+            <i class="far fa-question-circle"></i>
+            <span>User Guide</span></a>
+    </li>
 
 </ul>

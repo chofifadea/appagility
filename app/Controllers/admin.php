@@ -19,14 +19,4 @@ class admin extends BaseController
         ];
         return view('admin/inbox', $data);
     }
-
-
-
-    public function input()
-    {
-        $data = [
-            'title' => 'Input | Controling Pallet'
-        ];
-        return view('admin/input', $data);
-    }
 }
