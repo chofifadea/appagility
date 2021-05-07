@@ -7,7 +7,7 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Input Data Pallet</h1>
-
+    <?= $validation->listErrors(); ?>
     <!-- DataTales Example -->
     <form action="<?= base_url('transactions-input') ?>" method="POST">
         <?= csrf_field(); ?>

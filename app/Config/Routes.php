@@ -43,6 +43,8 @@ $routes->get('transactions', 'transactions::index');
 $routes->post('transactions-save', 'transactions::save');
 $routes->get('input', 'transactions::input');
 $routes->post('transactions-input', 'transactions::simpandata');
+$routes->get('output', 'transactions::output');
+$routes->post('transactions-output', 'transactions::simpandataoutput');
 
 /*
  * --------------------------------------------------------------------
