@@ -21,7 +21,6 @@ class transactions extends BaseController
 
     public function output()
     {
-        session();
         helper('form');
         $data = [
             'title' => 'Output | Controling Pallet',
@@ -32,7 +31,7 @@ class transactions extends BaseController
 
     public function input()
     {
-        session();
+        // session();
         $data = [
             'title' => 'Input | Controling Pallet',
             'validation' => \Config\Services::validation()
@@ -45,7 +44,10 @@ class transactions extends BaseController
     {
         //validasi input
         if (!$this->validate([
-            'pallet_name' => 'required|is_not_unique[transactions.pallet_name]'
+            'pallet_name' => 'required',
+            'information' => 'required',
+            'site' => 'required',
+            'quantity' => 'required'
         ])) {
             $validation = \Config\Services::validation();
             return redirect()->to('/transactions/input')->withInput()->with('validation', $validation);
@@ -68,9 +70,12 @@ class transactions extends BaseController
 
     public function simpandataoutput()
     {
-        //validasi input
+        // validasi output
         if (!$this->validate([
-            'pallet_name' => 'required|is_not_unique[transactions.pallet_name]'
+            'pallet_name' => 'required',
+            'information' => 'required',
+            'site' => 'required',
+            'quantity' => 'required'
         ])) {
             $validation = \Config\Services::validation();
             return redirect()->to('/transactions/output')->withInput()->with('validation', $validation);
@@ -90,21 +95,4 @@ class transactions extends BaseController
             return redirect()->to('/transactions/index');
         }
     }
-
-    // public function simpandata_input()
-    // {
-    //     $data = [
-    //         'pallet_name' => $this->request->getPost('pallet_name'),
-    //         'information' => $this->request->getPost('information'),
-    //         'site' => $this->request->getPost('site'),
-    //         'quantity' => $this->request->getPost('quantity')
-    //     ];
-    //     $transactions = new TransactionsModel();
-
-    //     $simpan = $transactions->simpan($data);
-
-    //     if ($simpan) {
-    //         return redirect()->to('/transactions/index');
-    //     }
-    // }
 }
