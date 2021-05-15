@@ -44,13 +44,33 @@ class transactions extends BaseController
     {
         //validasi input
         if (!$this->validate([
-            'pallet_name' => 'required',
-            'information' => 'required',
-            'site' => 'required',
-            'quantity' => 'required'
+            'pallet_name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Pallet harus diisi.'
+                ]
+            ],
+            'quantity' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Jumlah harus diisi.'
+                ]
+            ],
+            'site' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tujuan harus diisi.'
+                ]
+            ],
+            'information' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi.'
+                ]
+            ]
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/transactions/input')->withInput()->with('validation', $validation);
+            return redirect()->to('/transactions/input')->withInput();
         }
         $data = [
             'pallet_name' => $this->request->getPost('pallet_name'),
@@ -72,13 +92,33 @@ class transactions extends BaseController
     {
         // validasi output
         if (!$this->validate([
-            'pallet_name' => 'required',
-            'information' => 'required',
-            'site' => 'required',
-            'quantity' => 'required'
+            'pallet_name' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Pallet harus diisi.'
+                ]
+            ],
+            'quantity' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Jumlah harus diisi.'
+                ]
+            ],
+            'site' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Tujuan harus diisi.'
+                ]
+            ],
+            'information' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Keterangan harus diisi.'
+                ]
+            ]
         ])) {
             $validation = \Config\Services::validation();
-            return redirect()->to('/transactions/output')->withInput()->with('validation', $validation);
+            return redirect()->to('/transactions/output')->withInput();
         }
         $data = [
             'pallet_name' => $this->request->getPost('pallet_name'),
