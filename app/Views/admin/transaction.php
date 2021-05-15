@@ -7,17 +7,22 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Transaction</h1>
-
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Data Transaction</h6>
         </div>
+        <?php if (session()->getFlashdata('pesan')) : ?>
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('pesan'); ?>
+            </div>
+        <?php endif; ?>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Pallet Name</th>
                             <th>Information</th>
                             <th>Site</th>
@@ -26,13 +31,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($transaction as $transaction) : ?>
+                        <?php $i = 1; ?>
+                        <?php foreach ($tampildata as $row) : ?>
                             <tr>
-                                <td><?= $transaction['pallet_name']; ?></td>
-                                <td><?= $transaction['information']; ?></td>
-                                <td><?= $transaction['site']; ?></td>
-                                <td><?= $transaction['quantity']; ?></td>
-                                <td><?= $transaction['created_at']; ?></td>
+                                <td><?= $row->id = $i++ ?></td>
+                                <td><?= $row->pallet_name ?></td>
+                                <td><?= $row->information ?></td>
+                                <td><?= $row->site ?></td>
+                                <td><?= $row->quantity ?></td>
+                                <td><?= $row->created_at ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

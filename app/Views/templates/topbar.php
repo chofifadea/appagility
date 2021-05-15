@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
     <div class="container">
-        <a class="navbar-brand" href="<?= base_url('/public/img/logo.svg'); ?>">
-            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24">
+        <a class="navbar-brand" href="<?= base_url('transactions/index'); ?>">
+            <img src="../img/logoagility.png" alt="" width="230" height="71">
         </a>
     </div>
 
@@ -26,7 +26,7 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Profile Admin</span>
-                <img class="img-profile rounded-circle" src="<?= base_url('/public/img/undraw_profile_1.svg'); ?>">
+                <img class="img-profile rounded-circle" img src="../img/undraw_profile_1.svg" alt="" width=" 30" height="24">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

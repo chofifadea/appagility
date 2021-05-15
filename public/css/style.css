@@ -1,0 +1,10 @@
+.bg-gradient-primary-login {
+  background-image: url("../img/logoagility.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.card-body-login {
+  margin: 30px;
+  background: transparent;
+}
