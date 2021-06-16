@@ -18,21 +18,24 @@
                                     <h1 class="h4 text-gray-900 mb-4"><b>Control Pallet Agility</b></h1>
                                     <h2 class="h6 text-gray-900 mb-4">Please login for using this app</h2>
                                 </div>
-                                <form class="user">
+                                <form class="user" id="form-login">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." autofocus>
+                                        <input type="text" class="form-control form-control-user" id="username" name="username" aria-describedby="emailHelp" placeholder="Username" autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
                                         </div>
                                     </div>
-                                    <a href="<?= base_url('/admin/admin'); ?>" class="btn btn-primary btn-user btn-block">
+                                    <div class="alert alert-danger" id="error-msg" style="display: none;">
+                                        
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-user btn-block" onclick="coba_login()" id="btn-login">
                                         Login
-                                    </a>
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -45,3 +48,7 @@
 
 </div>
 <?= $this->endSection(); ?>
+
+<?= $this->section('page_js') ?>
+    <script type="text/javascript" src="<?= base_url() ?>/js/page-login.js"></script>
+<?= $this->endSection() ?>

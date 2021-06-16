@@ -20,7 +20,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('AuthController');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -34,10 +34,13 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'AuthController::index');
+$routes->post('/auth/login',  'AuthController::coba_login');
+$routes->get('/auth/logout', 'AuthController::coba_logout');
 // $routes->get('/', 'admin::index');
 // $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 
+$routes->get('/dashboard', 'Admin::index');
 // CRUD Transactions 
 $routes->get('transactions', 'transactions::index');
 $routes->post('transactions-save', 'transactions::save');

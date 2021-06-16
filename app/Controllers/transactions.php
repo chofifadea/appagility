@@ -16,6 +16,8 @@ class transactions extends BaseController
             'title' => 'Transaction | Controling Pallet',
             'tampildata' => $transactions->tampildata()->getResult()
         ];
+        // print_r($data);
+        // exit();
         return view('admin/transaction', $data);
     }
 

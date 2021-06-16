@@ -2,12 +2,14 @@
 
 namespace App\Controllers;
 
-class admin extends BaseController
+class Admin extends BaseController
 {
-    public function admin()
+    public function index()
     {
+        $sess = session();
         $data = [
-            'title' => 'Dashboard | Controling Pallet'
+            'title' => 'Dashboard | Controling Pallet',
+            'sess' => $sess
         ];
         return view('admin/index', $data);
     }
