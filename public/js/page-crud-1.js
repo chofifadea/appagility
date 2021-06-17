@@ -114,31 +114,34 @@ $(document).ready(function(){
         .then(function(value){
             console.log('swal val', value);
 
-            swal({
-                title: 'Menghapus Data',
-                icon: 'info',
-                buttons: false
-            });
+            if(value == 'hapus')
+            {
+                swal({
+                    title: 'Menghapus Data',
+                    icon: 'info',
+                    buttons: false
+                });
 
-            var url = btn.attr('data-url');
-            var id = btn.attr('data-id');
+                var url = btn.attr('data-url');
+                var id = btn.attr('data-id');
 
-            $.ajax({
-                url: url,
-                method: 'post',
-                data: {id: id},
-                success: function(resp)
-                {
-                    document.location.reload();
-                },
-                error: function(err)
-                {
-                    swal({
-                        title: 'Gagal menghapus',
-                        icon: 'error'
-                    });
-                }
-            });
+                $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: {id: id},
+                    success: function(resp)
+                    {
+                        document.location.reload();
+                    },
+                    error: function(err)
+                    {
+                        swal({
+                            title: 'Gagal menghapus',
+                            icon: 'error'
+                        });
+                    }
+                });
+            }
             // swal.getState
         });
     }

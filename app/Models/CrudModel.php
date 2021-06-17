@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class CrudModel extends Model
+{
+    function find_many($where)
+    {
+        if(array_key_exists('deleted_at', $where) == false)
+        {
+            $where['deleted_at'] = null;
+        }
+
+        $res = $this->db->table($this->table)
+            // ->where(['deleted_at' => null])
+            ->where($where)
+            ->get()->getResultArray();
+        return $res;
+    }
+
+    function find_one($where)
+    {
+        $res = $this->find_many($where);
+        if(count($res) == 0)
+        {
+            return null;
+        }
+        return $res[0];
+    }
+
+    public function create($data)
+    {
+        $this->db->table($this->table)->insert($data);
+        // return $id;
+        $id =  $this->db->insertID();
+        return $this->find_one([$this->primaryKey => $id]);
+    }
+
+    public function update_data($where, $data)
+    {
+        $target = $this->find_one($where);
+
+        if($target == null)
+        {
+            // echo 'hmm';
+            // print_r($where);
+            // print_r($data);
+            return null;
+        }
+
+        $where2 = [ $this->primaryKey => $target[$this->primaryKey] ];
+        $this->db->table($this->table)
+            ->where($where2)
+            ->update($data);
+        
+        return $this->find_one($where2);
+    }
+
+    public function flag_hapus($where)
+    {
+        $target = $this->find_one($where);
+
+        if($target == null)
+        {
+            return null;
+        }
+
+        $where2 = [ $this->primaryKey => $target[$this->primaryKey] ];
+
+        $skrg = date('Y-m-d H:i:s');
+
+        $data = ['deleted_at' => $skrg];
+
+        $this->db->table($this->table)->where($where2)->update($data);
+
+        return $target;
+    }
+}
