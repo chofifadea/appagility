@@ -1,3 +1,9 @@
+$(document).ready(function(){
+    $('#form-login').on('submit', function(ev){
+        ev.preventDefault();
+        coba_login();
+    });
+});
 function coba_login()
 {
     var form = $('#form-login');

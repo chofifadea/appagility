@@ -67,4 +67,24 @@ class PenggunaModel extends Model
         $id =  $this->db->insertID();
         return $this->find_one([$this->primaryKey => $id]);
     }
+
+    public function update_data($where, $data)
+    {
+        $target = $this->find_one($where);
+
+        if($target == null)
+        {
+            echo 'hmm';
+            print_r($where);
+            print_r($data);
+            return null;
+        }
+
+        $where2 = [ $this->primaryKey => $target[$this->primaryKey] ];
+        $this->db->table($this->table)
+            ->where($where2)
+            ->update($data);
+        
+        return $this->find_one($where2);
+    }
 }

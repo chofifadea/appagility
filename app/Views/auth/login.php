@@ -33,7 +33,7 @@
                                     <div class="alert alert-danger" id="error-msg" style="display: none;">
                                         
                                     </div>
-                                    <button type="button" class="btn btn-primary btn-user btn-block" onclick="coba_login()" id="btn-login">
+                                    <button type="submit" class="btn btn-primary btn-user btn-block" onclick="coba_login()" id="btn-login">
                                         Login
                                     </button>
                                 </form>

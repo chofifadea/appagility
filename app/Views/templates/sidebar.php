@@ -21,6 +21,34 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <?php if($sess->data['tipe'] == 'superadmin') : ?>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/pengguna'); ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Pengguna</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/pallet'); ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Master Pallet</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/warehouse'); ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Master Warehouse</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <?php endif ?>
+
     <!-- Nav Item - inbox -->
     <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/admin/inbox'); ?>">
