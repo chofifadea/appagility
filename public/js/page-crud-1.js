@@ -90,6 +90,59 @@ $(document).ready(function(){
         form_modal.find('#id').val(data_id);
     }
 
+    var dialog_hapus = function(btn)
+    {
+        swal({
+            title: 'Hapus Data',
+            text: 'Anda akan menghapus data?',
+            icon: 'warning',
+            buttons: {
+                // cancel: "Run away!",
+                batal: {
+                    text: "Batal",
+                    value: "batal",
+                    className: 'btn btn-success'
+                },
+                hapus: {
+                    text: 'Hapus',
+                    value: 'hapus',
+                    className: 'btn btn-danger'
+                }
+                // defeat: true,
+            }
+        })
+        .then(function(value){
+            console.log('swal val', value);
+
+            swal({
+                title: 'Menghapus Data',
+                icon: 'info',
+                buttons: false
+            });
+
+            var url = btn.attr('data-url');
+            var id = btn.attr('data-id');
+
+            $.ajax({
+                url: url,
+                method: 'post',
+                data: {id: id},
+                success: function(resp)
+                {
+                    document.location.reload();
+                },
+                error: function(err)
+                {
+                    swal({
+                        title: 'Gagal menghapus',
+                        icon: 'error'
+                    });
+                }
+            });
+            // swal.getState
+        });
+    }
+
     form_modal.on('submit', function(ev){
         ev.preventDefault();
         crud_submit_form();
@@ -105,10 +158,6 @@ $(document).ready(function(){
     btn_save_modal.on('click', crud_submit_form);
 
     var list_btn_edit = mytable.find('.btn-edit');
-    // console.log('btn edit', list_btn_edit);
-    // list_btn_edit.forEach(function(btn_edit){
-    //     dialog_edit(btn_edit);
-    // });
     $.each(list_btn_edit, function(index, btn_edit){
         $(btn_edit).on('click', function(){
             dialog_edit(btn_edit);
@@ -119,5 +168,11 @@ $(document).ready(function(){
     // list_btn_hapus.forEach(function(btn_hapus){
     //     dialog_hapus(btn_hapus);
     // });
+    $.each(list_btn_hapus, function(index, btn_hps){
+        btn_hps = $(btn_hps);
+        btn_hps.on('click', function(){
+            dialog_hapus(btn_hps);
+        });
+    });
 });
 

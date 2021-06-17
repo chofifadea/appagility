@@ -41,6 +41,7 @@ $routes->get('/auth/logout', 'AuthController::coba_logout');
 $routes->get('/pengguna', 'PenggunaController::index');
 $routes->post('/pengguna', 'PenggunaController::create');
 $routes->post('/pengguna/update', 'PenggunaController::update');
+$routes->post('/pengguna/hapus', 'PenggunaController::hapus');
 // $routes->get('/', 'admin::index');
 // $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 

@@ -100,4 +100,36 @@ class PenggunaController extends BaseController
 
         echo json_encode($res);
     }
+
+    public function hapus()
+    {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+        if($sess->data['tipe'] != 'superadmin')
+        {
+            return redirect()->to(base_url() . '/dashboard');
+        }
+
+        $id = $this->request->getPost('id');
+
+        $model = new PenggunaModel();
+
+        // $skrg = date('Y-m-d H:i:s');
+
+        $where = ['id' => $id];
+        // $data = ['deleted_at' => $skrg];
+
+        $res = $model->flag_hapus($where);
+
+        if($res == null)
+        {
+            // echo 'nool';
+            $this->response->setStatusCode(400);
+        }
+
+        echo json_encode($res);
+    }
 }

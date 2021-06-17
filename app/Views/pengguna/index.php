@@ -31,7 +31,7 @@
                                 <td col-name='nama' is-plain='1'><?= $row['nama'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-edit" data-id="<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
-                                    <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $row['id'] ?>"><i class="fa fa-trash"></i> Hapus</button>
+                                    <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url() ?>/pengguna/hapus"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -82,5 +82,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('page_js') ?>
-    <script type="text/javascript" src="<?= base_url() ?>/js/page-crud-1.js?t=13"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/js/page-crud-1.js?t=11"></script>
+    <script>
+        
+    </script>
 <?= $this->endSection() ?>

@@ -25,8 +25,13 @@ class PenggunaModel extends Model
 
     function find_many($where)
     {
+        if(array_key_exists('deleted_at', $where) == false)
+        {
+            $where['deleted_at'] = null;
+        }
+
         $res = $this->db->table($this->table)
-            ->where(['deleted_at' => null])
+            // ->where(['deleted_at' => null])
             ->where($where)
             ->get()->getResultArray();
         return $res;
@@ -74,9 +79,9 @@ class PenggunaModel extends Model
 
         if($target == null)
         {
-            echo 'hmm';
-            print_r($where);
-            print_r($data);
+            // echo 'hmm';
+            // print_r($where);
+            // print_r($data);
             return null;
         }
 
@@ -86,5 +91,25 @@ class PenggunaModel extends Model
             ->update($data);
         
         return $this->find_one($where2);
+    }
+
+    public function flag_hapus($where)
+    {
+        $target = $this->find_one($where);
+
+        if($target == null)
+        {
+            return null;
+        }
+
+        $where2 = [ $this->primaryKey => $target[$this->primaryKey] ];
+
+        $skrg = date('Y-m-d H:i:s');
+
+        $data = ['deleted_at' => $skrg];
+
+        $this->db->table($this->table)->where($where2)->update($data);
+
+        return $target;
     }
 }
