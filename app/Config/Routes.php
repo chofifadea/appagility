@@ -47,6 +47,11 @@ $routes->get('/pallet', 'PalletController::index');
 $routes->post('/pallet', 'PalletController::create');
 $routes->post('/pallet/update', 'PalletController::update');
 $routes->post('/pallet/hapus', 'PalletController::hapus');
+
+$routes->get('/warehouse', 'WarehouseController::index');
+$routes->post('/warehouse', 'WarehouseController::create');
+$routes->post('/warehouse/update', 'WarehouseController::update');
+$routes->post('/warehouse/hapus', 'WarehouseController::hapus');
 // $routes->get('/', 'admin::index');
 // $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 
