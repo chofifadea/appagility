@@ -14,14 +14,22 @@ class CrudModel extends Model
         return $this->table;
     }
 
+    protected function base_query()
+    {
+        $q = $this->db->table($this->table . ' _');
+        
+        return $q;
+    }
+
     function find_many($where)
     {
-        if(array_key_exists('deleted_at', $where) == false)
+        if(array_key_exists('_.deleted_at', $where) == false)
         {
-            $where['deleted_at'] = null;
+            $where['_.deleted_at'] = null;
         }
 
-        $res = $this->db->table($this->table)
+        // $res = $this->db->table($this->table)
+        $res = $this->base_query()
             // ->where(['deleted_at' => null])
             ->where($where)
             ->get()->getResultArray();
@@ -43,7 +51,7 @@ class CrudModel extends Model
         $this->db->table($this->table)->insert($data);
         // return $id;
         $id =  $this->db->insertID();
-        return $this->find_one([$this->primaryKey => $id]);
+        return $this->find_one(['_.' . $this->primaryKey => $id]);
     }
 
     public function update_data($where, $data)

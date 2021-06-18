@@ -60,9 +60,10 @@ $routes->get('/inbox', 'Admin::inbox');
 $routes->get('/dashboard', 'Admin::index');
 // CRUD Transactions 
 $routes->get('transactions', 'transactions::index');
-$routes->post('transactions-save', 'transactions::save');
-$routes->get('input', 'transactions::input');
-$routes->post('transactions-input', 'transactions::simpandata');
+// $routes->post('transactions-save', 'transactions::save');
+$routes->get('/input', 'transactions::input');
+$routes->post('/input', 'transactions::create_input');
+// $routes->post('transactions-input', 'transactions::simpandata');
 $routes->get('/output', 'transactions::output');
 $routes->post('/output', 'transactions::create_output');
 // $routes->post('transactions-output', 'transactions::simpandataoutput');

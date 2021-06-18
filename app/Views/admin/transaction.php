@@ -28,7 +28,10 @@
                             <th>From Site</th>
                             <th>To Site</th>
                             <th>Quantity</th>
-                            <th>Date</th>
+                            <th>Created By</th>
+                            <th>Created At</th>
+                            <td>Approved By</td>
+                            <td>Approved At</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +44,10 @@
                                 <td><?= $row['nama_wh_asal'] ?></td>
                                 <td><?= $row['nama_wh_tujuan'] ?></td>
                                 <td><?= $row['quantity'] ?></td>
+                                <td><?= $row['nama_creator'] ?></td>
                                 <td><?= $row['created_at'] ?></td>
+                                <td><?= $row['nama_approver'] ?></td>
+                                <td><?= $row['approved_at'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

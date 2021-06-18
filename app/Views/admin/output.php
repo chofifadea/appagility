@@ -36,7 +36,7 @@
                 <select class="form-control" name="from_site" id="from_site" <?= $sess->data['tipe'] == 'superadmin' ? '' : 'disabled="true"' ?>>
                     <option value="">Pilih Site</option>
                     <?php foreach($list_warehouse as $wh): ?>
-                        <option value="<?= $wh['id'] ?>" <?= $sess->data['id_warehouse'] == $wh['id'] ? 'selected' : '' ?> ><?= $wh['nama'] ?></option>
+                        <option value="<?= $wh['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $wh['id'] ? 'selected' : '' ?> ><?= $wh['nama'] ?></option>
                     <?php endforeach ?>
                 </select>
                 <div class="invalid-feedback" for='from_site'>

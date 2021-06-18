@@ -24,7 +24,7 @@ class transactions extends BaseController
 
         if($sess->data['tipe'] == 'superadmin')
         {
-
+            $rows = $transactions->find_many([]);
         }
         else 
         {
@@ -74,11 +74,15 @@ class transactions extends BaseController
             return redirect()->to(base_url());
         }
 
-        // session();
+        $model_warehouse = new WarehouseModel();
+        $model_pallet = new PalletModel();
+
         $data = [
             'title' => 'Input | Controling Pallet',
             'validation' => \Config\Services::validation(),
-            'sess' => $sess
+            'sess' => $sess,
+            'list_pallet' => $model_pallet->find_many([]),
+            'list_warehouse' => $model_warehouse->find_many([]),
         ];
         return view('admin/input', $data);
     }
@@ -112,8 +116,6 @@ class transactions extends BaseController
             $data['id_warehouse_asal'] = $sess->data['id_warehouse'];
         }
 
-        // print_r($data);
-
         $err = [];
 
         if(empty($data['id_pallet']) == true)
@@ -138,7 +140,70 @@ class transactions extends BaseController
             $this->response->setStatusCode(400);
             return json_encode(['fields' => $err]);
         }
-        // return json_encode($data);
+
+        $model = new TransactionsModel();
+
+        $res = $model->create($data);
+
+        if($res == null)
+        {
+            $this->response->setStatusCode(400);
+            return json_encode($res);
+        }
+        return json_encode($res);
+    }
+
+    public function create_input()
+    {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
+        $skrg = date('Y-m-d H:i:s');
+
+        $data = [
+            'id_pallet' => $this->request->getPost('pallet'),
+            'quantity' => $this->request->getPost('quantity'),
+            // 'id_warehouse_tujuan' => $this->request->getPost('site'),
+            'information' => $this->request->getPost('information'),
+            'created_by' => $sess->data['id'],
+            'status' => 'approved',
+            'created_at' => $skrg,
+            'approved_by' => $sess->data['id'],
+            'approved_at' => $skrg
+        ];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+            $data['id_warehouse_tujuan'] = $this->request->getPost('site');
+        }
+        else 
+        {
+            $data['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
+        }
+
+        $err = [];
+
+        if(empty($data['id_pallet']) == true)
+        {
+            $err['pallet'] = 'Pallet harus dipilih';
+        }
+        if(empty($data['quantity']) == true)
+        {
+            $err['quantity'] = 'Quantity harus diisi';
+        }
+        if(empty($data['id_warehouse_tujuan']) == true)
+        {
+            $err['site'] = 'Site tujuan harus dipilih';
+        }
+
+        if(count($err) > 0)
+        {
+            $this->response->setStatusCode(400);
+            return json_encode(['fields' => $err]);
+        }
 
         $model = new TransactionsModel();
 
