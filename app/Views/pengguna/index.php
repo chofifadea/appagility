@@ -21,6 +21,7 @@
                         <tr>
                             <th>Username</th>
                             <th>Nama</th>
+                            <th>Warehouse</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,10 +30,12 @@
                             <tr>
                                 <td col-name='username' is-plain='1'><?= $row['username'] ?></td>
                                 <td col-name='nama' is-plain='1'><?= $row['nama'] ?></td>
+                                <td><?= $row['nama_warehouse'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-edit" data-id="<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
                                     <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url() ?>/pengguna/hapus"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
+                                <input type="hidden" col-name='id_warehouse' is-plain='1' value="<?= $row['id_warehouse'] ?>"/>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -67,6 +70,15 @@
                         <label>Password</label>
                         <input class="form-control" name="password" type="text"/>
                     </div>
+                    <div class="form-group">
+                        <label>Warehouse</label>
+                        <select class="form-control" id="id_warehouse" name="id_warehouse">
+                            <option value="">Pilih Warehouse</option>
+                            <?php foreach($list_warehouse as $item): ?>
+                                <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
@@ -82,8 +94,5 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('page_js') ?>
-    <script type="text/javascript" src="<?= base_url() ?>/js/page-crud-1.js?t=11"></script>
-    <script>
-        
-    </script>
+    <script type="text/javascript" src="<?= base_url() ?>/js/page-crud-1.js?t=12"></script>
 <?= $this->endSection() ?>

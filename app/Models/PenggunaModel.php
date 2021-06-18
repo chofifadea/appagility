@@ -25,15 +25,30 @@ class PenggunaModel extends Model
 
     function find_many($where)
     {
-        if(array_key_exists('deleted_at', $where) == false)
+        $relpw = new RelPenggunaWarehouse();
+        $wh = new WarehouseModel();
+
+        $t_relpw = $relpw->getTable();
+        $t_wh = $wh->getTable();
+
+        if(array_key_exists('_.deleted_at', $where) == false)
         {
-            $where['deleted_at'] = null;
+            $where['_.deleted_at'] = null;
         }
 
-        $res = $this->db->table($this->table)
+        $res = $this->db->table($this->table . ' _')
+            ->join($t_relpw . ' rpw', '_.id = rpw.id_pengguna and rpw.end_at is null', 'left')
+            ->join($t_wh . ' wh', 'rpw.id_warehouse = wh.id', 'left')
             // ->where(['deleted_at' => null])
             ->where($where)
+            ->select([
+                '_.*',
+                'wh.nama as nama_warehouse',
+                'rpw.id_warehouse'
+            ])
             ->get()->getResultArray();
+        // print_r($res);
+        // exit();
         return $res;
     }
 
@@ -70,7 +85,7 @@ class PenggunaModel extends Model
         $this->db->table($this->table)->insert($data);
         // return $id;
         $id =  $this->db->insertID();
-        return $this->find_one([$this->primaryKey => $id]);
+        return $this->find_one(['_.'.$this->primaryKey => $id]);
     }
 
     public function update_data($where, $data)
@@ -85,7 +100,7 @@ class PenggunaModel extends Model
             return null;
         }
 
-        $where2 = [ $this->primaryKey => $target[$this->primaryKey] ];
+        $where2 = [ '_.' . $this->primaryKey => $target[$this->primaryKey] ];
         $this->db->table($this->table)
             ->where($where2)
             ->update($data);

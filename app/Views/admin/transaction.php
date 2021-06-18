@@ -25,21 +25,23 @@
                             <th>ID</th>
                             <th>Pallet Name</th>
                             <th>Information</th>
-                            <th>Site</th>
+                            <th>From Site</th>
+                            <th>To Site</th>
                             <th>Quantity</th>
                             <th>Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        <?php foreach ($tampildata as $row) : ?>
+                        <?php foreach ($rows as $row) : ?>
                             <tr>
-                                <td><?= $row->id = $i++ ?></td>
-                                <td><?= $row->pallet_name ?></td>
-                                <td><?= $row->information ?></td>
-                                <td><?= $row->site ?></td>
-                                <td><?= $row->quantity ?></td>
-                                <td><?= $row->created_at ?></td>
+                                <td><?= $i++ ?></td>
+                                <td><?= $row['nama_pallet'] ?></td>
+                                <td><?= $row['information'] ?></td>
+                                <td><?= $row['nama_wh_asal'] ?></td>
+                                <td><?= $row['nama_wh_tujuan'] ?></td>
+                                <td><?= $row['quantity'] ?></td>
+                                <td><?= $row['created_at'] ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

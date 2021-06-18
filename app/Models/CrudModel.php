@@ -6,6 +6,14 @@ use CodeIgniter\Model;
 
 class CrudModel extends Model
 {
+    protected $table = '';
+    protected $primaryKey = 'id';
+
+    public function getTable()
+    {
+        return $this->table;
+    }
+
     function find_many($where)
     {
         if(array_key_exists('deleted_at', $where) == false)
@@ -56,6 +64,30 @@ class CrudModel extends Model
             ->update($data);
         
         return $this->find_one($where2);
+    }
+
+    public function update_many($where, $data)
+    {
+        $targets = $this->find_many($where);
+
+        if(count($targets) == 0)
+        {
+            return null;
+        }
+
+        $res = [];
+
+        foreach($targets as $target)
+        {
+            $where2 = [$this->primaryKey => $target[$this->primaryKey] ];
+            $this->db->table($this->table)
+                ->where($where2)
+                ->update($data);
+            
+            $res[] = $this->find_one($where2);
+        }
+
+        return $res;
     }
 
     public function flag_hapus($where)

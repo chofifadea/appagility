@@ -52,6 +52,8 @@ $routes->get('/warehouse', 'WarehouseController::index');
 $routes->post('/warehouse', 'WarehouseController::create');
 $routes->post('/warehouse/update', 'WarehouseController::update');
 $routes->post('/warehouse/hapus', 'WarehouseController::hapus');
+
+$routes->get('/inbox', 'Admin::inbox');
 // $routes->get('/', 'admin::index');
 // $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 
@@ -61,8 +63,9 @@ $routes->get('transactions', 'transactions::index');
 $routes->post('transactions-save', 'transactions::save');
 $routes->get('input', 'transactions::input');
 $routes->post('transactions-input', 'transactions::simpandata');
-$routes->get('output', 'transactions::output');
-$routes->post('transactions-output', 'transactions::simpandataoutput');
+$routes->get('/output', 'transactions::output');
+$routes->post('/output', 'transactions::create_output');
+// $routes->post('transactions-output', 'transactions::simpandataoutput');
 
 /*
  * --------------------------------------------------------------------

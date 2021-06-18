@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Models\PalletModel;
 use App\Models\TransactionsModel;
+use App\Models\WarehouseModel;
 
 class transactions extends BaseController
 {
@@ -10,11 +12,31 @@ class transactions extends BaseController
 
     public function index()
     {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
         $transactions = new TransactionsModel();
+
+        $rows = [];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+
+        }
+        else 
+        {
+            $id_wh = $sess->data['id_warehouse'];
+            $rows = $transactions->data_in_wh($id_wh);
+        }
 
         $data = [
             'title' => 'Transaction | Controling Pallet',
-            'tampildata' => $transactions->tampildata()->getResult()
+            // 'tampildata' => $transactions->tampildata()->getResult(),
+            'sess' => $sess,
+            'rows' => $rows
         ];
         // print_r($data);
         // exit();
@@ -23,27 +45,122 @@ class transactions extends BaseController
 
     public function output()
     {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
         helper('form');
+
+        $model_warehouse = new WarehouseModel();
+        $model_pallet = new PalletModel();
+
         $data = [
             'title' => 'Output | Controling Pallet',
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'sess' => $sess,
+            'list_pallet' => $model_pallet->find_many([]),
+            'list_warehouse' => $model_warehouse->find_many([]),
         ];
         return view('admin/output', $data);
     }
 
     public function input()
     {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
         // session();
         $data = [
             'title' => 'Input | Controling Pallet',
-            'validation' => \Config\Services::validation()
+            'validation' => \Config\Services::validation(),
+            'sess' => $sess
         ];
         return view('admin/input', $data);
+    }
+
+    public function create_output()
+    {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
+        $skrg = date('Y-m-d H:i:s');
+
+        $data = [
+            'id_pallet' => $this->request->getPost('pallet'),
+            'quantity' => $this->request->getPost('quantity'),
+            'id_warehouse_tujuan' => $this->request->getPost('site'),
+            'information' => $this->request->getPost('information'),
+            'created_by' => $sess->data['id'],
+            'status' => 'waiting_approval',
+            'created_at' => $skrg
+        ];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+            $data['id_warehouse_asal'] = $this->request->getPost('from_site');
+        }
+        else 
+        {
+            $data['id_warehouse_asal'] = $sess->data['id_warehouse'];
+        }
+
+        // print_r($data);
+
+        $err = [];
+
+        if(empty($data['id_pallet']) == true)
+        {
+            $err['pallet'] = 'Pallet harus dipilih';
+        }
+        if(empty($data['quantity']) == true)
+        {
+            $err['quantity'] = 'Quantity harus diisi';
+        }
+        if(empty($data['id_warehouse_tujuan']) == true)
+        {
+            $err['site'] = 'Site tujuan harus dipilih';
+        }
+        if(empty($data['id_warehouse_asal']) == true)
+        {
+            $err['from_site'] = 'Site Asal harus dipilih';
+        }
+
+        if(count($err) > 0)
+        {
+            $this->response->setStatusCode(400);
+            return json_encode(['fields' => $err]);
+        }
+        // return json_encode($data);
+
+        $model = new TransactionsModel();
+
+        $res = $model->create($data);
+
+        if($res == null)
+        {
+            $this->response->setStatusCode(400);
+            return json_encode($res);
+        }
+        return json_encode($res);
     }
 
 
     public function simpandata()
     {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
         //validasi input
         if (!$this->validate([
             'pallet_name' => [
@@ -92,6 +209,12 @@ class transactions extends BaseController
 
     public function simpandataoutput()
     {
+        $sess = session();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
         // validasi output
         if (!$this->validate([
             'pallet_name' => [

@@ -82,7 +82,17 @@ $(document).ready(function(){
             
             if(col_name !== undefined)
             {
-                var content = td.html();
+                // console.log('el', td, td.prop('tagName'));
+                var tagname = td.prop('tagName');
+                var content = '';
+                if(tagname == 'TD')
+                {
+                    content = td.html();
+                }
+                else if(tagname == 'INPUT')
+                {
+                    content = td.val();
+                }
                 form_modal.find('#' + col_name).val(content);
             }
         });

@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\PenggunaModel;
+use App\Models\RelPenggunaWarehouse;
+use App\Models\WarehouseModel;
 
 class PenggunaController extends BaseController
 {
@@ -19,11 +21,13 @@ class PenggunaController extends BaseController
         }
 
         $model = new PenggunaModel();
+        $m_wh = new WarehouseModel();
 
         $data = [
             'title' => 'Master Pengguna | Controlling Pallet',
             'sess' => $sess,
-            'rows' => $model->find_many(['tipe' => 'admin-gudang'])
+            'rows' => $model->find_many(['tipe' => 'admin-gudang']),
+            'list_warehouse' => $m_wh->find_many([]),
         ];
 
         return view('pengguna/index', $data);
@@ -45,21 +49,33 @@ class PenggunaController extends BaseController
             'username' => $this->request->getPost('username'),
             'nama' => $this->request->getPost('nama'),
             'password' => $this->request->getPost('password'),
-            // 'id_warehouse' => $this->request->get_post('id_warehouse'),
             'tipe' => 'admin-gudang'
         ];
-
+        
+        
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-
+        
         $model = new PenggunaModel();
-
+        
         $res = $model->create($data);
-
+        
         if($res==null)
         {
             $this->response->setStatusCode(400);
+            return json_encode($res);
         }
-        echo json_encode($res);
+        
+        $id_warehouse = $this->request->getPost('id_warehouse');
+
+        $m_rpw = new RelPenggunaWarehouse();
+        $nrpw = [
+            'id_pengguna' => $res['id'],
+            'id_warehouse' => $id_warehouse
+        ];
+
+        $m_rpw->create($nrpw);
+        
+        return json_encode($res);
         
     }
 
@@ -90,12 +106,25 @@ class PenggunaController extends BaseController
 
         $id = $this->request->getPost('id');
 
-        $where = ['id' => $id];
+        $where = ['_.id' => $id];
         $res = $model->update_data($where, $data);
 
         if($res == null)
         {
             $this->response->setStatusCode(400);
+            return json_encode($res);
+        }
+
+        $id_warehouse = $this->request->getPost('id_warehouse');
+
+        if($id_warehouse != $res['id_warehouse'])
+        {
+            $m_rpw = new RelPenggunaWarehouse();
+            $upd = [
+                'id_pengguna' => $res['id'],
+                'id_warehouse' => $id_warehouse,
+            ];
+            $m_rpw->create($upd);
         }
 
         echo json_encode($res);
@@ -119,7 +148,7 @@ class PenggunaController extends BaseController
 
         // $skrg = date('Y-m-d H:i:s');
 
-        $where = ['id' => $id];
+        $where = ['_.id' => $id];
         // $data = ['deleted_at' => $skrg];
 
         $res = $model->flag_hapus($where);
