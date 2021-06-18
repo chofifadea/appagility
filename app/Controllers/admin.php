@@ -35,15 +35,21 @@ class Admin extends BaseController
         $data = $sess->data;
         $is_superadmin = false;
 
+        $where = [
+            'approved_by' => null,
+            'status' => 'waiting_approval'
+        ];
+
         if($data['tipe'] == 'superadmin')
         {
-            $rows = $model->find_many(['approved_by' => null]);
             $is_superadmin = true;
         }
         else 
         {
-            $rows = $model->find_many(['approved_by' => null, 'id_warehouse_tujuan' => $data['id_warehouse']]);
+            $where['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
         }
+
+        $rows = $model->find_many($where);
 
         $data = [
             'title' => 'Inbox | Controling Pallet',
@@ -52,5 +58,62 @@ class Admin extends BaseController
             'is_superadmin' => $is_superadmin,
         ];
         return view('admin/inbox', $data);
+    }
+
+    public function approve_inbox()
+    {
+        $sess = $this->getsess();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
+        $id = $this->request->getPost('id');
+
+        $model = new TransactionsModel();
+
+        $where = [
+            '_.id' => $id,
+            'approved_by' => null,
+            'status' => 'waiting_approval'
+        ];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+
+        }
+        else
+        {
+            $where['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
+        }
+
+        $target = $model->find_one($where);
+
+        // echo 'target';
+        // print_r($target);
+
+        if($target == null)
+        {
+            $this->response->setStatusCode(404);
+            return 'data tidak ditemukan';
+        }
+
+        $skrg = date('Y-m-d H:i:s');
+
+        $where = ['_.id' => $target['id']];
+        $upd = [
+            'approved_at' => $skrg, 
+            'approved_by' => $sess->data['id'],
+            'status' => 'approved',
+        ];
+
+        $res = $model->update_data($where, $upd);
+
+        if($res == null)
+        {
+            $this->response->setStatusCode(400);
+        }
+
+        return json_encode($res);
     }
 }

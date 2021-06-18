@@ -71,6 +71,8 @@ class CrudModel extends Model
             ->where($where2)
             ->update($data);
         
+        $where2 = [ '_.' . $this->primaryKey => $target[$this->primaryKey] ];
+        
         return $this->find_one($where2);
     }
 

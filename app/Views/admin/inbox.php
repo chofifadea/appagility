@@ -10,19 +10,19 @@
     <div style="" class="row">
         <?php foreach($rows as $row): ?>
             <!-- Notifikasi Inbox-->
-            <div class="col-12 col-xl-3 col-lg-4 col-md-6 mb-10" style="margin-bottom: 1rem;">
+            <div class="col-12 col-xl-3 col-lg-4 col-md-6 mb-10 inbox-col" style="margin-bottom: 1rem;">
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" data-delay="100000">
                     <div class="toast-body">
                         <div style="min-height: 70px;">
-                            Masuk Palet dari Site <b><?= $row['nama_wh_tujuan'] ?></b> 
+                            Masuk Palet <b><?= $row['nama_pallet'] ?></b> dari Site <b><?= $row['nama_wh_tujuan'] ?></b> 
                             <?= $is_superadmin ? 'ke Site <b>' . $row['nama_wh_asal'] . '</b>': '' ?> 
                             dengan jumlah <?= $row['quantity'] ?>
                             
                         </div>
                         <small><?= date('d M Y H:i', strtotime($row['created_at'])) ?></small>
                         <div class="mt-2 pt-2 border-top">
-                            <button type="button" class="btn btn-primary btn-sm">Take action</button>
-                            <button type="button" class="btn btn-secondary btn-sm" data-bs-decline="toast">Decline</button>
+                            <button type="button" class="btn btn-primary btn-sm btn-approve" data-id="<?= $row['id'] ?>">Take action</button>
+                            <button type="button" class="btn btn-secondary btn-sm btn-reject" data-bs-decline="toast" data-id="<?= $row['id'] ?>">Decline</button>
                         </div>
                     </div>
                 </div>
@@ -32,5 +32,8 @@
     
 </div>
 
-
 <?= $this->endSection(); ?>
+
+<?= $this->section('page_js') ?>
+    <script type="text/javascript" src="<?= base_url() ?>/js/page-inbox-1.js"></script>
+<?= $this->endSection() ?>

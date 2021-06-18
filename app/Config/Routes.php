@@ -54,6 +54,8 @@ $routes->post('/warehouse/update', 'WarehouseController::update');
 $routes->post('/warehouse/hapus', 'WarehouseController::hapus');
 
 $routes->get('/inbox', 'Admin::inbox');
+$routes->post('/inbox/approve', 'Admin::approve_inbox');
+$routes->post('/inbox/reject', 'Admin::reject_inbox');
 // $routes->get('/', 'admin::index');
 // $routes->get('/transactions/(:segment)', 'Transactions::detail/$1');
 
