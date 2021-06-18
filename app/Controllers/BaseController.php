@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\RelPenggunaWarehouse;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -29,6 +30,8 @@ class BaseController extends Controller
 	 */
 	protected $helpers = [];
 
+	private $sess = null;
+
 	/**
 	 * Constructor.
 	 *
@@ -45,6 +48,25 @@ class BaseController extends Controller
 		// Preload any models, libraries, etc, here.
 		//--------------------------------------------------------------------
 		// E.g.: $this->session = \Config\Services::session();
-		session();
+		$this->sess = session();
+	}
+
+	protected function getsess()
+	{
+		$data = $this->sess->data;
+		$model = new RelPenggunaWarehouse();
+		$role = $model->find_one(['id_pengguna' => $data['id'], 'end_at' => null]);
+		if($role != null)
+		{
+			if($data['id_warehouse'] != $role['id_warehouse'])
+			{	
+				$data['id_warehouse'] = $role['id_warehouse'];
+				$this->sess->set([
+					'data' => $data
+				]);
+				$this->sess = session();
+			}
+		}
+		return $this->sess;
 	}
 }

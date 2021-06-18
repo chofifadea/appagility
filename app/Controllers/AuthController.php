@@ -11,7 +11,7 @@ class AuthController extends BaseController
 		$data = [
 			'title' => 'Login | Control Pallet'
 		];
-		$sess = session();
+		$sess = $this->getsess();
 		if($sess->masuk == 1)
 		{
 			return redirect()->to(base_url() . '/dashboard');
@@ -21,7 +21,7 @@ class AuthController extends BaseController
 
 	public function coba_logout()
 	{
-		$sess = session();
+		$sess = $this->getsess();
 		$sess->set(['masuk' => 0]);
 		$sess->remove('data');
 		return redirect()->to(base_url());
@@ -93,7 +93,7 @@ class AuthController extends BaseController
 
 	public function ok($pengguna)
 	{
-		$sess = session();
+		$sess = $this->getsess();
 		$sess->set([
 			'masuk' => 1,
 			'data' => $pengguna,

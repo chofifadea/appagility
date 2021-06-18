@@ -12,7 +12,7 @@ class transactions extends BaseController
 
     public function index()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -45,7 +45,7 @@ class transactions extends BaseController
 
     public function output()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -68,7 +68,7 @@ class transactions extends BaseController
 
     public function input()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -89,7 +89,7 @@ class transactions extends BaseController
 
     public function create_output()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -155,7 +155,7 @@ class transactions extends BaseController
 
     public function create_input()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -220,7 +220,7 @@ class transactions extends BaseController
 
     public function simpandata()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -274,7 +274,7 @@ class transactions extends BaseController
 
     public function simpandataoutput()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());

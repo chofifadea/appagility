@@ -10,7 +10,7 @@ class PenggunaController extends BaseController
 {
     public function index()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -35,7 +35,7 @@ class PenggunaController extends BaseController
 
     public function create()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -81,7 +81,7 @@ class PenggunaController extends BaseController
 
     public function update()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
@@ -132,7 +132,7 @@ class PenggunaController extends BaseController
 
     public function hapus()
     {
-        $sess = session();
+        $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
