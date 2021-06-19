@@ -8,6 +8,15 @@
     <h1 class="h3 mb-2 text-gray-800">Inbox Data Pallet</h1>
 
     <div style="" class="row">
+        <?php if(count($rows) == 0): ?>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p style="font-style: italic; text-align: center;">Tidak ada data</p>
+                    </div>
+                </div>
+            </div>
+        <?php endif ?>
         <?php foreach($rows as $row): ?>
             <!-- Notifikasi Inbox-->
             <div class="col-12 col-xl-3 col-lg-4 col-md-6 mb-10 inbox-col" style="margin-bottom: 1rem;">
@@ -35,5 +44,5 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('page_js') ?>
-    <script type="text/javascript" src="<?= base_url() ?>/js/page-inbox-1.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>/js/page-inbox-1.js?t=11"></script>
 <?= $this->endSection() ?>

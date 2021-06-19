@@ -24,7 +24,7 @@ class transactions extends BaseController
 
         if($sess->data['tipe'] == 'superadmin')
         {
-            $rows = $transactions->find_many([]);
+            $rows = $transactions->all_data();
         }
         else 
         {

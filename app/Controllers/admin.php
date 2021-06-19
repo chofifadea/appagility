@@ -62,13 +62,25 @@ class Admin extends BaseController
 
     public function approve_inbox()
     {
+        $id = $this->request->getPost('id');
+
+        return $this->process_inbox($id, 'approved');
+    }
+
+    public function reject_inbox()
+    {
+        $id = $this->request->getPost('id');
+
+        return $this->process_inbox($id, 'rejected');
+    }
+
+    public function process_inbox($id, $status)
+    {
         $sess = $this->getsess();
         if($sess->masuk == 0)
         {
             return redirect()->to(base_url());
         }
-
-        $id = $this->request->getPost('id');
 
         $model = new TransactionsModel();
 
@@ -89,9 +101,6 @@ class Admin extends BaseController
 
         $target = $model->find_one($where);
 
-        // echo 'target';
-        // print_r($target);
-
         if($target == null)
         {
             $this->response->setStatusCode(404);
@@ -104,7 +113,7 @@ class Admin extends BaseController
         $upd = [
             'approved_at' => $skrg, 
             'approved_by' => $sess->data['id'],
-            'status' => 'approved',
+            'status' => $status,
         ];
 
         $res = $model->update_data($where, $upd);

@@ -48,7 +48,48 @@ $(document).ready(function(){
 
     var dialog_reject = function(btn)
     {
+        swal({
+            icon: 'warning',
+            title: 'Reject Pallet Masuk',
+            text: 'Anda akan menolak pallet masuk?',
+            buttons: {
+                ya:{
+                    text: 'Ya',
+                    value: 1,
+                    className: 'btn btn-danger'
+                },
+                tidak: {
+                    text: 'Batal',
+                    value: 0,
+                    className: 'btn btn-secondary'
+                }
+            }
+        })
+        .then(function(val){
+            if(val == 1)
+            {
+                swal({icon: 'info', title: 'Memproses...', buttons: false});
 
+                var id = btn.attr('data-id');
+
+                $.ajax({
+                    method:'post',
+                    url: base_url + '/inbox/reject',
+                    data: {id: id},
+                    success: function(resp)
+                    {
+                        swal({icon:'success', title:'Data berhasil di-reject'})
+                            .then(function(){
+                                btn.closest('div.inbox-col').remove();
+                            });
+                    },
+                    error: function(err)
+                    {
+                        swal({icon: 'error', title: 'Terjadi kesalahan'});
+                    }
+                });
+            }
+        });
     }
 
     var list_btn_approve = $('.btn-approve');

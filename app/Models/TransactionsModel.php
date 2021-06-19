@@ -65,6 +65,20 @@ class TransactionsModel extends CrudModel
                 ->where(['id_warehouse_asal' => $id_wh])
                 ->orWhere(['id_warehouse_tujuan' => $id_wh])
             ->groupEnd()
+            ->groupStart()
+                ->whereIn('status', ['waiting_approval', 'approved'])
+            ->groupEnd()
+            ->where(['_.deleted_at' => null])
+            ->get()->getResultArray();
+        return $q;
+    }
+
+    public function all_data()
+    {
+        $q = $this->base_query()
+            ->groupStart()
+                ->whereIn('status', ['waiting_approval', 'approved'])
+            ->groupEnd()
             ->where(['_.deleted_at' => null])
             ->get()->getResultArray();
         return $q;
