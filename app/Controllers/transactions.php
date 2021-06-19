@@ -28,8 +28,8 @@ class transactions extends BaseController
         }
         else 
         {
-            $id_wh = $sess->data['id_site'];
-            $rows = $transactions->data_in_wh($id_wh);
+            $id_site = $sess->data['id_site'];
+            $rows = $transactions->data_in_site($id_site);
         }
 
         $data = [

@@ -44,21 +44,24 @@ class TransactionsModel extends CrudModel
 
         return $this->db->table($this->table . ' _')
             ->join($t_pallet . ' pal', 'pal.id = _.id_pallet', 'left')
-            ->join($t_wh . ' from_wh', 'from_wh.id = _.id_site_asal', 'left')
-            ->join($t_wh . ' to_wh', 'to_wh.id = _.id_site_tujuan', 'left')
+            ->join($t_wh . ' from_site', 'from_site.id = _.id_site_asal', 'left')
+            ->join($t_wh . ' to_site', 'to_site.id = _.id_site_tujuan', 'left')
             ->join($t_pgn . ' pgn_creator', 'pgn_creator.id = _.created_by', 'left')
             ->join($t_pgn . ' pgn_approver', 'pgn_approver.id = _.approved_by', 'left')
             ->select([
                 '_.*',
                 'pal.nama as nama_pallet',
-                'from_wh.nama as nama_site_asal',
-                'to_wh.nama as nama_site_tujuan',
+                'from_site.nama as nama_site_asal',
+                'to_site.nama as nama_site_tujuan',
                 'pgn_creator.nama as nama_creator',
-                'pgn_approver.nama as nama_approver'
+                'pgn_approver.nama as nama_approver',
+                "date_format(_.created_at, '%d %M %Y') as tgl_trans",
+                'from_site.tipe as from_tipe',
+                'to_site.tipe as to_tipe',
             ]);
     }
 
-    public function data_in_wh($id_wh)
+    public function data_in_site($id_wh)
     {
         $q = $this->base_query()
             ->groupStart()
@@ -69,6 +72,7 @@ class TransactionsModel extends CrudModel
                 ->whereIn('status', ['waiting_approval', 'approved'])
             ->groupEnd()
             ->where(['_.deleted_at' => null])
+            ->orderBy('created_at', 'asc')
             ->get()->getResultArray();
         return $q;
     }
@@ -80,6 +84,7 @@ class TransactionsModel extends CrudModel
                 ->whereIn('status', ['waiting_approval', 'approved'])
             ->groupEnd()
             ->where(['_.deleted_at' => null])
+            ->orderBy('created_at', 'asc')
             ->get()->getResultArray();
         return $q;
     }

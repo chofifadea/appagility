@@ -13,9 +13,27 @@ class Admin extends BaseController
         {
             return redirect()->to(base_url());
         }
+        $model = new TransactionsModel();
+        $rows = [];
+        $area_labels_data = [];
+        if($sess->data['tipe'] == 'superadmin')
+        {
+            $rows = $model->all_data();
+            $area_labels_data = $this->area_chart($rows);
+        }
+        else 
+        {
+            $id = $sess->data['id_site'];
+            $rows = $model->data_in_site($id);
+            $area_labels_data = $this->area_chart($rows, $id);
+        }
+        // print_r($rows);
+        // exit();
+        
         $data = [
             'title' => 'Dashboard | Controling Pallet',
-            'sess' => $sess
+            'sess' => $sess,
+            'area' => $area_labels_data,
         ];
         return view('admin/index', $data);
     }
@@ -124,5 +142,69 @@ class Admin extends BaseController
         }
 
         return json_encode($res);
+    }
+
+
+    protected function area_chart($rows, $id=null)
+    {
+        $area_labels_data = [];
+        $counter = 0;
+        $total_current = 0;
+        foreach($rows as $row)
+        {
+            // hanya olah data yg statusnya telah di-approve
+            if(in_array($row['status'], ['approved']) == false)
+            {
+                continue;
+            }
+
+            $tgl = $row['tgl_trans'];
+            $qty = intval($row['quantity']);
+            
+            $counter++;
+            
+            if($id == null)
+            {
+                if($row['from_tipe'] == 'vendor' && $row['to_tipe'] == 'warehouse')
+                {
+                    $total_current += $qty;
+                }
+                else if($row['from_tipe'] == 'warehouse' && $row['to_tipe'] == 'vendor')
+                {
+                    $total_current -= $qty;
+                }
+                else 
+                {
+                    
+                }
+            }
+            else 
+            {
+                if($row['id_site_asal'] == $id)
+                {
+                    $total_current -= $qty;
+                }
+                else if($row['id_site_tujuan'] == $id)
+                {
+                    $total_current += $qty;
+                }
+            }
+
+            $area_labels_data[$tgl] = $total_current;
+        }
+
+        // return $area_labels_data;
+        $labels = [];
+        $values = [];
+        foreach($area_labels_data as $key => $item)
+        {
+            $labels[] = $key;
+            $values[] = $item;
+        }
+
+        return [
+            'labels' => $labels,
+            'data' => $values,
+        ];
     }
 }

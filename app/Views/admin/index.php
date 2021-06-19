@@ -79,23 +79,16 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('page_js') ?>
-<!-- Bootstrap core JavaScript-->
-<!-- <script src="<?= base_url(); ?>/vendor/jquery/jquery.min.js"></script> -->
-<!-- <script src="<?= base_url(); ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
 
-<!-- Core plugin JavaScript-->
-<!-- <script src="<?= base_url(); ?>/vendor/jquery-easing/jquery.easing.min.js"></script> -->
-
-<!-- Custom scripts for all pages-->
-<!-- <script src="<?= base_url(); ?>/js/sb-admin-2.min.js"></script> -->
-
-<!-- Page level plugins -->
-<!-- <script src="<?= base_url(); ?>/vendor/chart.js/Chart.min.js"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+    var data_area = <?= json_encode($area) ?>; 
+</script>
+
 <!-- Page level custom scripts -->
-<script src="<?= base_url(); ?>/js/demo/chart-area-demo.js?t=12"></script>
+<script src="<?= base_url(); ?>/js/demo/chart-area-demo.js?t=13"></script>
 <script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js?t=12"></script>
-<script src="<?= base_url(); ?>/js/demo/chart-bar-demo.js?t=12"></script>
+<!-- <script src="<?= base_url(); ?>/js/demo/chart-bar-demo.js?t=12"></script> -->
 
 <?= $this->endSection() ?>
