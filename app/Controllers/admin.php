@@ -46,7 +46,7 @@ class Admin extends BaseController
         }
         else 
         {
-            $where['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
+            $where['id_site_tujuan'] = $sess->data['id_site'];
         }
 
         $rows = $model->find_many($where);
@@ -96,7 +96,7 @@ class Admin extends BaseController
         }
         else
         {
-            $where['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
+            $where['id_site_tujuan'] = $sess->data['id_site'];
         }
 
         $target = $model->find_one($where);

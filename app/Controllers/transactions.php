@@ -96,6 +96,8 @@ class transactions extends BaseController
         }
 
         $skrg = date('Y-m-d H:i:s');
+        $jam = date('H:i:s');
+        $tgl_trans = $this->request->getPost('tgl');
 
         $data = [
             'id_pallet' => $this->request->getPost('pallet'),
@@ -104,7 +106,7 @@ class transactions extends BaseController
             'information' => $this->request->getPost('information'),
             'created_by' => $sess->data['id'],
             'status' => 'waiting_approval',
-            'created_at' => $skrg
+            'created_at' => $tgl_trans . ' ' . $jam
         ];
 
         if($sess->data['tipe'] == 'superadmin')
@@ -162,6 +164,9 @@ class transactions extends BaseController
         }
 
         $skrg = date('Y-m-d H:i:s');
+        $jam = date('H:i:s');
+        $tgl = $this->request->getPost('tgl');
+        $skrg = $tgl . ' ' . $jam;
 
         $data = [
             'id_pallet' => $this->request->getPost('pallet'),

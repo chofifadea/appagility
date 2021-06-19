@@ -52,7 +52,7 @@
                     <option value="">Pilih Site</option>
                     <?php foreach($list_site as $item): ?>
                         <?php if($item['tipe'] == 'warehouse'): ?>
-                            <option value="<?= $item['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $item['id'] ? 'selected' : '' ?>><?= $item['nama'] ?></option>
+                            <option value="<?= $item['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_site'] == $item['id'] ? 'selected' : '' ?>><?= $item['nama'] ?></option>
                         <?php endif ?>
                     <?php endforeach ?>
                 </select>
@@ -65,6 +65,13 @@
                 <input type="text" class="form-control <?= ($validation->hasError('information')) ? 'is-invalid' : ''; ?>" id="information" placeholder="" name="information">
                 <div class="invalid-feedback">
                     <?= $validation->getError('information'); ?>
+                </div>
+            </div>
+            <div class="col-10">
+                <label for="tgl" class="form-label">Tanggal</label>
+                <input type="date" class="form-control id="tgl" placeholder="" name="tgl">
+                <div class="invalid-feedback" for='tgl'>
+                    <?= $validation->getError('tgl'); ?>
                 </div>
             </div>
             <div class="col-10">

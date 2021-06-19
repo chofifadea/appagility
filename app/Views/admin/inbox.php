@@ -23,9 +23,9 @@
                 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" data-delay="100000">
                     <div class="toast-body">
                         <div style="min-height: 70px;">
-                            Masuk Palet <b><?= $row['nama_pallet'] ?></b> dari Site <b><?= $row['nama_wh_tujuan'] ?></b> 
-                            <?= $is_superadmin ? 'ke Site <b>' . $row['nama_wh_asal'] . '</b>': '' ?> 
-                            dengan jumlah <?= $row['quantity'] ?>
+                            Masuk Palet <b><?= $row['nama_pallet'] ?></b> dari Site <b><?= $row['nama_site_asal'] ?></b> 
+                            <?= $is_superadmin ? 'ke Site <b>' . $row['nama_site_tujuan'] . '</b>': '' ?> 
+                            dengan jumlah <b><?= $row['quantity'] ?></b>
                             
                         </div>
                         <small><?= date('d M Y H:i', strtotime($row['created_at'])) ?></small>

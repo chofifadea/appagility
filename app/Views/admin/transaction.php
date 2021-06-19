@@ -30,8 +30,8 @@
                             <th>Quantity</th>
                             <th>Created By</th>
                             <th>Created At</th>
-                            <td>Approved By</td>
-                            <td>Approved At</td>
+                            <th>Approved By</th>
+                            <th>Approved At</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +41,8 @@
                                 <td><?= $i++ ?></td>
                                 <td><?= $row['nama_pallet'] ?></td>
                                 <td><?= $row['information'] ?></td>
-                                <td><?= $row['nama_wh_asal'] ?></td>
-                                <td><?= $row['nama_wh_tujuan'] ?></td>
+                                <td><?= $row['nama_site_asal'] ?></td>
+                                <td><?= $row['nama_site_tujuan'] ?></td>
                                 <td><?= $row['quantity'] ?></td>
                                 <td><?= $row['nama_creator'] ?></td>
                                 <td><?= $row['created_at'] ?></td>

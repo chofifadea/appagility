@@ -51,8 +51,8 @@ class TransactionsModel extends CrudModel
             ->select([
                 '_.*',
                 'pal.nama as nama_pallet',
-                'from_wh.nama as nama_wh_asal',
-                'to_wh.nama as nama_wh_tujuan',
+                'from_wh.nama as nama_site_asal',
+                'to_wh.nama as nama_site_tujuan',
                 'pgn_creator.nama as nama_creator',
                 'pgn_approver.nama as nama_approver'
             ]);
