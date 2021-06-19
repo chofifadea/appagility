@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\PalletModel;
 use App\Models\TransactionsModel;
-use App\Models\WarehouseModel;
+use App\Models\SiteModel;
 
 class transactions extends BaseController
 {
@@ -28,7 +28,7 @@ class transactions extends BaseController
         }
         else 
         {
-            $id_wh = $sess->data['id_warehouse'];
+            $id_wh = $sess->data['id_site'];
             $rows = $transactions->data_in_wh($id_wh);
         }
 
@@ -53,7 +53,7 @@ class transactions extends BaseController
 
         helper('form');
 
-        $model_warehouse = new WarehouseModel();
+        $m_site = new SiteModel();
         $model_pallet = new PalletModel();
 
         $data = [
@@ -61,7 +61,7 @@ class transactions extends BaseController
             'validation' => \Config\Services::validation(),
             'sess' => $sess,
             'list_pallet' => $model_pallet->find_many([]),
-            'list_warehouse' => $model_warehouse->find_many([]),
+            'list_site' => $m_site->find_many([]),
         ];
         return view('admin/output', $data);
     }
@@ -74,7 +74,7 @@ class transactions extends BaseController
             return redirect()->to(base_url());
         }
 
-        $model_warehouse = new WarehouseModel();
+        $m_site = new SiteModel();
         $model_pallet = new PalletModel();
 
         $data = [
@@ -82,7 +82,7 @@ class transactions extends BaseController
             'validation' => \Config\Services::validation(),
             'sess' => $sess,
             'list_pallet' => $model_pallet->find_many([]),
-            'list_warehouse' => $model_warehouse->find_many([]),
+            'list_site' => $m_site->find_many([]),
         ];
         return view('admin/input', $data);
     }
@@ -100,7 +100,7 @@ class transactions extends BaseController
         $data = [
             'id_pallet' => $this->request->getPost('pallet'),
             'quantity' => $this->request->getPost('quantity'),
-            'id_warehouse_tujuan' => $this->request->getPost('site'),
+            'id_site_tujuan' => $this->request->getPost('site'),
             'information' => $this->request->getPost('information'),
             'created_by' => $sess->data['id'],
             'status' => 'waiting_approval',
@@ -109,11 +109,11 @@ class transactions extends BaseController
 
         if($sess->data['tipe'] == 'superadmin')
         {
-            $data['id_warehouse_asal'] = $this->request->getPost('from_site');
+            $data['id_site_asal'] = $this->request->getPost('from_site');
         }
         else 
         {
-            $data['id_warehouse_asal'] = $sess->data['id_warehouse'];
+            $data['id_site_asal'] = $sess->data['id_site'];
         }
 
         $err = [];
@@ -126,11 +126,11 @@ class transactions extends BaseController
         {
             $err['quantity'] = 'Quantity harus diisi';
         }
-        if(empty($data['id_warehouse_tujuan']) == true)
+        if(empty($data['id_site_tujuan']) == true)
         {
             $err['site'] = 'Site tujuan harus dipilih';
         }
-        if(empty($data['id_warehouse_asal']) == true)
+        if(empty($data['id_site_asal']) == true)
         {
             $err['from_site'] = 'Site Asal harus dipilih';
         }
@@ -166,22 +166,23 @@ class transactions extends BaseController
         $data = [
             'id_pallet' => $this->request->getPost('pallet'),
             'quantity' => $this->request->getPost('quantity'),
-            // 'id_warehouse_tujuan' => $this->request->getPost('site'),
+            // 'id_site_tujuan' => $this->request->getPost('site'),
             'information' => $this->request->getPost('information'),
             'created_by' => $sess->data['id'],
             'status' => 'approved',
             'created_at' => $skrg,
             'approved_by' => $sess->data['id'],
-            'approved_at' => $skrg
+            'approved_at' => $skrg,
+            'id_site_asal' => $this->request->getPost('from_site'),
         ];
 
         if($sess->data['tipe'] == 'superadmin')
         {
-            $data['id_warehouse_tujuan'] = $this->request->getPost('site');
+            $data['id_site_tujuan'] = $this->request->getPost('site');
         }
         else 
         {
-            $data['id_warehouse_tujuan'] = $sess->data['id_warehouse'];
+            $data['id_site_tujuan'] = $sess->data['id_site'];
         }
 
         $err = [];
@@ -194,9 +195,13 @@ class transactions extends BaseController
         {
             $err['quantity'] = 'Quantity harus diisi';
         }
-        if(empty($data['id_warehouse_tujuan']) == true)
+        if(empty($data['id_site_tujuan']) == true)
         {
             $err['site'] = 'Site tujuan harus dipilih';
+        }
+        if(empty($data['id_site_asal']) == true)
+        {
+            $err['from_site'] = 'Site Asal harus dipilih';
         }
 
         if(count($err) > 0)

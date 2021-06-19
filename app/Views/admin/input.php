@@ -32,12 +32,28 @@
                 </div>
             </div>
             <div class="col-10">
+                <label for="site" class="form-label">Asal</label>
+                <select class="form-control" name="from_site" id="from_site" style="width: 100%;" >
+                    <option value="">Pilih Site</option>
+                    <?php foreach($list_site as $item): ?>
+                        <?php if($item['tipe'] == 'vendor'): ?>
+                            <option value="<?= $item['id'] ?>" ><?= $item['nama'] ?></option>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </select>
+                <div class="invalid-feedback" for='site'>
+                    <?= $validation->getError('site'); ?>
+                </div>
+            </div>
+            <div class="col-10">
                 <label for="site" class="form-label">Tujuan</label>
                 <!-- <input type="text" class="form-control <?= ($validation->hasError('site')) ? 'is-invalid' : ''; ?>" id="site" placeholder="Site" name="site"> -->
                 <select class="form-control" name="site" id="site" style="width: 100%;" <?= $sess->data['tipe'] == 'superadmin' ? '' : 'disabled=""' ?>>
                     <option value="">Pilih Site</option>
-                    <?php foreach($list_warehouse as $item): ?>
-                        <option value="<?= $item['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $item['id'] ? 'selected' : '' ?>><?= $item['nama'] ?></option>
+                    <?php foreach($list_site as $item): ?>
+                        <?php if($item['tipe'] == 'warehouse'): ?>
+                            <option value="<?= $item['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $item['id'] ? 'selected' : '' ?>><?= $item['nama'] ?></option>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </select>
                 <div class="invalid-feedback" for='site'>

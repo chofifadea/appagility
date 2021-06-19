@@ -35,8 +35,10 @@
                 <label for="site" class="form-label">Asal</label>
                 <select class="form-control" name="from_site" id="from_site" <?= $sess->data['tipe'] == 'superadmin' ? '' : 'disabled="true"' ?>>
                     <option value="">Pilih Site</option>
-                    <?php foreach($list_warehouse as $wh): ?>
-                        <option value="<?= $wh['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $wh['id'] ? 'selected' : '' ?> ><?= $wh['nama'] ?></option>
+                    <?php foreach($list_site as $wh): ?>
+                        <?php if($wh['tipe'] == 'warehouse'): ?>
+                            <option value="<?= $wh['id'] ?>" <?= $sess->data['tipe'] != 'superadmin' && $sess->data['id_warehouse'] == $wh['id'] ? 'selected' : '' ?> ><?= $wh['nama'] ?></option>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </select>
                 <div class="invalid-feedback" for='from_site'>
@@ -48,7 +50,7 @@
                 <!-- <input type="text" class="form-control <?= ($validation->hasError('site')) ? 'is-invalid' : ''; ?>" id="site" placeholder="Site" name="site"> -->
                 <select class="form-control" name="site" id="site">
                     <option value="">Pilih Site</option>
-                    <?php foreach($list_warehouse as $wh): ?>
+                    <?php foreach($list_site as $wh): ?>
                         <option value="<?= $wh['id'] ?>"><?= $wh['nama'] ?></option>
                     <?php endforeach ?>
                 </select>

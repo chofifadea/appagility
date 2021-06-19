@@ -35,7 +35,7 @@ class TransactionsModel extends CrudModel
     protected function base_query()
     {
         $m_pallet = new PalletModel();
-        $m_wh = new WarehouseModel();
+        $m_wh = new SiteModel();
         $m_pgn = new PenggunaModel();
 
         $t_pallet = $m_pallet->getTable();
@@ -44,8 +44,8 @@ class TransactionsModel extends CrudModel
 
         return $this->db->table($this->table . ' _')
             ->join($t_pallet . ' pal', 'pal.id = _.id_pallet', 'left')
-            ->join($t_wh . ' from_wh', 'from_wh.id = _.id_warehouse_asal', 'left')
-            ->join($t_wh . ' to_wh', 'to_wh.id = _.id_warehouse_tujuan', 'left')
+            ->join($t_wh . ' from_wh', 'from_wh.id = _.id_site_asal', 'left')
+            ->join($t_wh . ' to_wh', 'to_wh.id = _.id_site_tujuan', 'left')
             ->join($t_pgn . ' pgn_creator', 'pgn_creator.id = _.created_by', 'left')
             ->join($t_pgn . ' pgn_approver', 'pgn_approver.id = _.approved_by', 'left')
             ->select([
@@ -62,8 +62,8 @@ class TransactionsModel extends CrudModel
     {
         $q = $this->base_query()
             ->groupStart()
-                ->where(['id_warehouse_asal' => $id_wh])
-                ->orWhere(['id_warehouse_tujuan' => $id_wh])
+                ->where(['id_site_asal' => $id_wh])
+                ->orWhere(['id_site_tujuan' => $id_wh])
             ->groupEnd()
             ->groupStart()
                 ->whereIn('status', ['waiting_approval', 'approved'])
