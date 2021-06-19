@@ -12,16 +12,16 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping structure for table appagility.rel_pengguna_warehouse
-CREATE TABLE IF NOT EXISTS `rel_pengguna_warehouse` (
+-- Dumping structure for table appagility.rel_pengguna_site
+CREATE TABLE IF NOT EXISTS `rel_pengguna_site` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_pengguna` int(11) NOT NULL,
-  `id_warehouse` int(11) NOT NULL,
+  `id_site` int(11) NOT NULL,
   `start_at` timestamp NULL DEFAULT NULL,
   `end_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Data exporting was unselected.
 

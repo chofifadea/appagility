@@ -48,10 +48,15 @@ $routes->post('/pallet', 'PalletController::create');
 $routes->post('/pallet/update', 'PalletController::update');
 $routes->post('/pallet/hapus', 'PalletController::hapus');
 
-$routes->get('/warehouse', 'WarehouseController::index');
-$routes->post('/warehouse', 'WarehouseController::create');
-$routes->post('/warehouse/update', 'WarehouseController::update');
-$routes->post('/warehouse/hapus', 'WarehouseController::hapus');
+$routes->get('/site', 'SiteController::index');
+$routes->post('/site', 'SiteController::create');
+$routes->post('/site/update', 'SiteController::update');
+$routes->post('/site/hapus', 'SiteController::hapus');
+
+$routes->get('/keterangan', 'TransactionInfoController::index');
+$routes->post('/keterangan', 'TransactionInfoController::create');
+$routes->post('/keterangan/update', 'TransactionInfoController::update');
+$routes->post('/keterangan/hapus', 'TransactionInfoController::hapus');
 
 $routes->get('/inbox', 'Admin::inbox');
 $routes->post('/inbox/approve', 'Admin::approve_inbox');

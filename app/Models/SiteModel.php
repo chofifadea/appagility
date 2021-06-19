@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
-class WarehouseModel extends CrudModel
+class SiteModel extends CrudModel
 {
-    protected $table = 'warehouse';
+    protected $table = 'site';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'nama',
+        'tipe'
     ];
 }

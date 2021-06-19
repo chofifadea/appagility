@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\PenggunaModel;
-use App\Models\RelPenggunaWarehouse;
-use App\Models\WarehouseModel;
+use App\Models\RelPenggunaSite;
+use App\Models\SiteModel;
 
 class PenggunaController extends BaseController
 {
@@ -21,13 +21,13 @@ class PenggunaController extends BaseController
         }
 
         $model = new PenggunaModel();
-        $m_wh = new WarehouseModel();
+        $m_site = new SiteModel();
 
         $data = [
             'title' => 'Master Pengguna | Controlling Pallet',
             'sess' => $sess,
-            'rows' => $model->find_many(['tipe' => 'admin-gudang']),
-            'list_warehouse' => $m_wh->find_many([]),
+            'rows' => $model->find_many(['_.tipe' => 'admin-gudang']),
+            'list_site' => $m_site->find_many(['_.tipe' => 'warehouse']),
         ];
 
         return view('pengguna/index', $data);
@@ -65,12 +65,12 @@ class PenggunaController extends BaseController
             return json_encode($res);
         }
         
-        $id_warehouse = $this->request->getPost('id_warehouse');
+        $id_site = $this->request->getPost('id_site');
 
-        $m_rpw = new RelPenggunaWarehouse();
+        $m_rpw = new RelPenggunaSite();
         $nrpw = [
             'id_pengguna' => $res['id'],
-            'id_warehouse' => $id_warehouse
+            'id_site' => $id_site
         ];
 
         $m_rpw->create($nrpw);
@@ -115,14 +115,14 @@ class PenggunaController extends BaseController
             return json_encode($res);
         }
 
-        $id_warehouse = $this->request->getPost('id_warehouse');
+        $id_site = $this->request->getPost('id_site');
 
-        if($id_warehouse != $res['id_warehouse'])
+        if($id_site != $res['id_site'])
         {
-            $m_rpw = new RelPenggunaWarehouse();
+            $m_rpw = new RelPenggunaSite();
             $upd = [
                 'id_pengguna' => $res['id'],
-                'id_warehouse' => $id_warehouse,
+                'id_site' => $id_site,
             ];
             $m_rpw->create($upd);
         }

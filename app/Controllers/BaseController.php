@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\RelPenggunaWarehouse;
+use App\Models\RelPenggunaSite;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -54,13 +54,13 @@ class BaseController extends Controller
 	protected function getsess()
 	{
 		$data = $this->sess->data;
-		$model = new RelPenggunaWarehouse();
+		$model = new RelPenggunaSite();
 		$role = $model->find_one(['id_pengguna' => $data['id'], 'end_at' => null]);
 		if($role != null)
 		{
-			if($data['id_warehouse'] != $role['id_warehouse'])
+			if($data['id_site'] != $role['id_site'])
 			{	
-				$data['id_warehouse'] = $role['id_warehouse'];
+				$data['id_site'] = $role['id_site'];
 				$this->sess->set([
 					'data' => $data
 				]);

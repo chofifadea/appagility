@@ -25,8 +25,8 @@ class PenggunaModel extends Model
 
     function find_many($where)
     {
-        $relpw = new RelPenggunaWarehouse();
-        $wh = new WarehouseModel();
+        $relpw = new RelPenggunaSite();
+        $wh = new SiteModel();
 
         $t_relpw = $relpw->getTable();
         $t_wh = $wh->getTable();
@@ -38,13 +38,13 @@ class PenggunaModel extends Model
 
         $res = $this->db->table($this->table . ' _')
             ->join($t_relpw . ' rpw', '_.id = rpw.id_pengguna and rpw.end_at is null', 'left')
-            ->join($t_wh . ' wh', 'rpw.id_warehouse = wh.id', 'left')
+            ->join($t_wh . ' wh', 'rpw.id_site = wh.id', 'left')
             // ->where(['deleted_at' => null])
             ->where($where)
             ->select([
                 '_.*',
-                'wh.nama as nama_warehouse',
-                'rpw.id_warehouse'
+                'wh.nama as nama_site',
+                'rpw.id_site'
             ])
             ->get()->getResultArray();
         // print_r($res);

@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-class RelPenggunaWarehouse extends CrudModel
+class RelPenggunaSite extends CrudModel
 {
-    protected $table = 'rel_pengguna_warehouse';
+    protected $table = 'rel_pengguna_site';
     protected $primaryKey = 'id';
     protected $allowedFields = [
         'id_pengguna',
-        'id_warehouse',
+        'id_site',
         'start_at',
         'end_at',
     ];

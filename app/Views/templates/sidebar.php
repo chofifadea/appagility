@@ -40,12 +40,20 @@
     <hr class="sidebar-divider">
 
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/warehouse'); ?>">
+        <a class="nav-link" href="<?= base_url('/site'); ?>">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Master Warehouse</span></a>
+            <span>Master Site</span></a>
     </li>
 
     <hr class="sidebar-divider">
+
+    <!-- <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/keterangan'); ?>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Master Keterangan</span></a>
+    </li>
+
+    <hr class="sidebar-divider"> -->
 
     <?php endif ?>
 

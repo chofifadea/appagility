@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Models\WarehouseModel;
+use App\Models\SiteModel;
 
-class WarehouseController extends BaseController
+class SiteController extends BaseController
 {
     public function index()
     {
@@ -18,15 +18,15 @@ class WarehouseController extends BaseController
             return redirect()->to(base_url() . '/dashboard');
         }
 
-        $model = new WarehouseModel();
+        $model = new SiteModel();
 
         $data = [
-            'title' => 'Master Warehouse | Controlling Pallet',
+            'title' => 'Master Site | Controlling Pallet',
             'sess' => $sess,
             'rows' => $model->find_many([]),
         ];
 
-        return view('warehouse/index', $data);
+        return view('site/index', $data);
     }
 
     public function create()
@@ -43,9 +43,15 @@ class WarehouseController extends BaseController
 
         $data = [
             'nama' => $this->request->getPost('nama'),
+            'tipe' => $this->request->getPost('tipe'),
         ];
 
-        $model = new WarehouseModel();
+        if(in_array($data['tipe'], ['warehouse', 'vendor']) == false)
+        {
+            $data['tipe'] = 'warehouse';
+        }
+
+        $model = new SiteModel();
 
         $res = $model->create($data);
 
@@ -70,14 +76,20 @@ class WarehouseController extends BaseController
         }
 
         $data = [
-            'nama' => $this->request->getPost('nama')
+            'nama' => $this->request->getPost('nama'),
+            'tipe' => $this->request->getPost('tipe'),
         ];
+
+        if(in_array($data['tipe'], ['warehouse', 'vendor']) == false)
+        {
+            $data['tipe'] = 'warehouse';
+        }
 
         $id = $this->request->getPost('id');
 
         $where = ['id' => $id];
 
-        $model = new WarehouseModel();
+        $model = new SiteModel();
 
         $res = $model->update_data($where, $data);
 
@@ -105,7 +117,7 @@ class WarehouseController extends BaseController
 
         $where = ['id' => $id];
 
-        $model = new WarehouseModel();
+        $model = new SiteModel();
 
         $res = $model->flag_hapus($where);
 

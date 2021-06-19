@@ -12,11 +12,12 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping structure for table appagility.warehouse
-CREATE TABLE IF NOT EXISTS `warehouse` (
+-- Dumping structure for table appagility.site
+CREATE TABLE IF NOT EXISTS `site` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
+  `tipe` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 

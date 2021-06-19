@@ -30,12 +30,12 @@
                             <tr>
                                 <td col-name='username' is-plain='1'><?= $row['username'] ?></td>
                                 <td col-name='nama' is-plain='1'><?= $row['nama'] ?></td>
-                                <td><?= $row['nama_warehouse'] ?></td>
+                                <td><?= $row['nama_site'] ?></td>
                                 <td>
                                     <button type="button" class="btn btn-success btn-edit" data-id="<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
                                     <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url() ?>/pengguna/hapus"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
-                                <input type="hidden" col-name='id_warehouse' is-plain='1' value="<?= $row['id_warehouse'] ?>"/>
+                                <input type="hidden" col-name='id_site' is-plain='1' value="<?= $row['id_site'] ?>"/>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -71,10 +71,10 @@
                         <input class="form-control" name="password" type="text"/>
                     </div>
                     <div class="form-group">
-                        <label>Warehouse</label>
-                        <select class="form-control" id="id_warehouse" name="id_warehouse">
-                            <option value="">Pilih Warehouse</option>
-                            <?php foreach($list_warehouse as $item): ?>
+                        <label>Site</label>
+                        <select class="form-control" id="id_site" name="id_site">
+                            <option value="">Pilih Site</option>
+                            <?php foreach($list_site as $item): ?>
                                 <option value="<?= $item['id'] ?>"><?= $item['nama'] ?></option>
                             <?php endforeach ?>
                         </select>

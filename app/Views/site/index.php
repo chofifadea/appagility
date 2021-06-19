@@ -2,11 +2,11 @@
 
 <?= $this->section('page-content') ?>
 <div class="container-fluid">
-    <h3 class="text-gray-800 mb-2">Manajemen Master Warehouse</h3>
+    <h3 class="text-gray-800 mb-2">Manajemen Master Site</h3>
 
     <div class="card shadow mb-4">
         <div class="card-header py-3" style="display: flex; justify-content: space-between;">
-            <h4 class="m-0 font-weight-bold text-primary">Data Warehouse</h4>
+            <h4 class="m-0 font-weight-bold text-primary">Data Site</h4>
             <button class="btn btn-primary" id="btn-add"><i class="fa fa-plus"></i> Tambah</button>
         </div>
         <?php if (session()->getFlashdata('pesan')) : ?>
@@ -20,6 +20,7 @@
                     <thead>
                         <tr>
                             <th>Nama</th>
+                            <th>Tipe</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -27,6 +28,8 @@
                         <?php foreach($rows as $row): ?>
                             <tr>
                                 <td col-name='nama' is-plain='1'><?= $row['nama'] ?></td>
+                                <td><?= ucwords($row['tipe']) ?></td>
+                                <input type="hidden" col-name='tipe' value="<?= $row['tipe'] ?>"/>
                                 <td>
                                     <button type="button" class="btn btn-success btn-edit" data-id="<?= $row['id'] ?>"><i class="fa fa-edit"></i> Edit</button>
                                     <button type="button" class="btn btn-danger btn-hapus" data-id="<?= $row['id'] ?>" data-url="<?= base_url() ?>/warehouse/hapus"><i class="fa fa-trash"></i> Hapus</button>
@@ -42,7 +45,7 @@
 
 <div class="modal fade in" id="modal-form1" role="dialog">
    <div class="modal-dialog" role="document">
-        <form class="modal-content" id="form-input" create-action="<?= base_url() ?>/warehouse" update-action='<?= base_url() ?>/warehouse/update' method="post">
+        <form class="modal-content" id="form-input" create-action="<?= base_url() ?>/site" update-action='<?= base_url() ?>/site/update' method="post">
             <input type="hidden" name="id" id="id"/>
        <!-- <div class="modal-content"> -->
             <div class="modal-header">
@@ -56,6 +59,14 @@
                     <div class="form-group">
                         <label>Nama</label>
                         <input class="form-control" name="nama" id="nama"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipe</label>
+                        <select class="form-control" id="tipe" name="tipe">
+                            <option value="">Pilih Tipe</option>
+                            <option value="warehouse">Warehouse</option>
+                            <option value="vendor">Vendor</option>
+                        </select>
                     </div>
                 </div>
             </div>
