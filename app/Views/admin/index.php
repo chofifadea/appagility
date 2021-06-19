@@ -54,7 +54,7 @@
                         <canvas id="myPieChart"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
-                        <span class="mr-2">
+                        <!-- <span class="mr-2">
                             <i class="fas fa-circle text-primary"></i> JPS
                         </span>
                         <span class="mr-2">
@@ -65,7 +65,12 @@
                         </span>
                         <span class="mr-2">
                             <i class="fas fa-circle text-mbp"></i> MBP
-                        </span>
+                        </span> -->
+                        <!-- <?php foreach($pie['labels'] as $k => $v): ?>
+                            <span class="mr-2">
+                                <i class="fas fa-circle text-mbp"></i> <?= $v ?>
+                            </span>
+                        <?php endforeach ?> -->
                     </div>
                     <hr>
 
@@ -84,11 +89,12 @@
 
 <script>
     var data_area = <?= json_encode($area) ?>; 
+    var data_pie = <?= json_encode($pie) ?>;
 </script>
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url(); ?>/js/demo/chart-area-demo.js?t=13"></script>
-<script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js?t=12"></script>
+<script src="<?= base_url(); ?>/js/demo/chart-pie-demo.js?t=13"></script>
 <!-- <script src="<?= base_url(); ?>/js/demo/chart-bar-demo.js?t=12"></script> -->
 
 <?= $this->endSection() ?>

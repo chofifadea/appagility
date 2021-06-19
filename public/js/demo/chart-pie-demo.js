@@ -7,9 +7,11 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["JPS", "MSP", "MAA", "MBP"],
+    // labels: ["JPS", "MSP", "MAA", "MBP"],
+    labels: data_pie.labels,
     datasets: [{
-      data: [35, 30, 15, 20],
+      // data: [35, 30, 15, 20],
+      data: data_pie.data,
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#fd7e14'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#fd7e14'],
       hoverBorderColor: "rgba(234, 236, 244, 234)",
