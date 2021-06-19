@@ -8,7 +8,7 @@
 
         <div class="col-md-6">
 
-            <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(3px);">
                 <div class="card-body-login p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
