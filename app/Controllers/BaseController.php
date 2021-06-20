@@ -7,6 +7,7 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use stdClass;
 
 /**
  * Class BaseController
@@ -54,7 +55,19 @@ class BaseController extends Controller
 
 	protected function getsess()
 	{
-		$data = $this->sess->data;
+		$sess = $this->sess;
+		if($sess = null)
+		{
+			$res = new stdClass();
+			$res->masuk = 0;
+			$res->data= null;
+			return $res;
+		}
+		$data = $sess->data;
+		if($data == null)
+		{
+			return $sess;
+		}
 		$model = new RelPenggunaSite();
 		$role = $model->find_one(['id_pengguna' => $data['id'], 'end_at' => null]);
 		if($role != null)
