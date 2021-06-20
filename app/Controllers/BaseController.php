@@ -56,24 +56,23 @@ class BaseController extends Controller
 	protected function getsess()
 	{
 		$sess = $this->sess;
-		if($sess = null)
-		{
-			$res = new stdClass();
-			$res->masuk = 0;
-			$res->data= null;
-			return $res;
+		if ($sess->masuk == null) {
+			$sess->set([
+				'masuk' => 0,
+				'data' => null
+			]);
+			$sess = session();
 		}
+
 		$data = $sess->data;
-		if($data == null)
-		{
+		if ($data == null) {
 			return $sess;
 		}
 		$model = new RelPenggunaSite();
 		$role = $model->find_one(['id_pengguna' => $data['id'], 'end_at' => null]);
-		if($role != null)
-		{
-			if($data['id_site'] != $role['id_site'])
-			{	
+
+		if ($role != null) {
+			if ($data['id_site'] != $role['id_site']) {
 				$data['id_site'] = $role['id_site'];
 				$this->sess->set([
 					'data' => $data
