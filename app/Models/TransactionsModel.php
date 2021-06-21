@@ -96,6 +96,11 @@ class TransactionsModel extends CrudModel
             ->orderBy('_.created_at', 'desc')
             ->limit(10);
 
+        if($id_site != null)
+        {
+            $q->where(['id_site_tujuan' => $id_site]);
+        }
+
         $q = $q->get()->getResultArray();
         
         $last_index_waiting = 0;
