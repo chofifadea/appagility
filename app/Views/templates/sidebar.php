@@ -5,7 +5,7 @@
         <div class="sidebar-brand-icon">
             <i class="fas fa-user"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">Admin Site</div>
+        <div class="sidebar-brand-text mx-3"><?= $sess->data['tipe'] == 'superadmin' ? 'Super Admin' : 'Admin ' . $sess->data['nama_site'] ?></div>
     </a>
 
     <!-- Divider -->

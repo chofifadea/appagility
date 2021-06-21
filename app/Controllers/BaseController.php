@@ -74,6 +74,7 @@ class BaseController extends Controller
 		if ($role != null) {
 			if ($data['id_site'] != $role['id_site']) {
 				$data['id_site'] = $role['id_site'];
+				$data['nama_site'] = $role['nama_site'];
 				$this->sess->set([
 					'data' => $data
 				]);
