@@ -24,6 +24,7 @@ class PalletController extends BaseController
             'title' => 'Master Pallet | Controlling Pallet',
             'sess' => $sess,
             'rows' => $model->find_many([]),
+            'notifs' => $this->get_notif()
         ];
 
         return view('pallet/index', $data);

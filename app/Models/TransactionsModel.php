@@ -69,10 +69,10 @@ class TransactionsModel extends CrudModel
                 ->orWhere(['id_site_tujuan' => $id_wh])
             ->groupEnd()
             ->groupStart()
-                ->whereIn('status', ['waiting_approval', 'approved'])
+                ->whereIn('_.status', ['waiting_approval', 'approved'])
             ->groupEnd()
             ->where(['_.deleted_at' => null])
-            ->orderBy('created_at', 'asc')
+            ->orderBy('_.created_at', 'asc')
             ->get()->getResultArray();
         return $q;
     }
@@ -81,11 +81,55 @@ class TransactionsModel extends CrudModel
     {
         $q = $this->base_query()
             ->groupStart()
-                ->whereIn('status', ['waiting_approval', 'approved'])
+                ->whereIn('_.status', ['waiting_approval', 'approved'])
             ->groupEnd()
             ->where(['_.deleted_at' => null])
-            ->orderBy('created_at', 'asc')
+            ->orderBy('_.created_at', 'asc')
             ->get()->getResultArray();
         return $q;
+    }
+
+    public function get_notif($id_site = null)
+    {
+        $q = $this->base_query()
+            ->whereIn('_.status', ['waiting_approval', 'approved', 'rejected'])
+            ->orderBy('_.created_at', 'desc')
+            ->limit(10);
+
+        $q = $q->get()->getResultArray();
+        
+        $last_index_waiting = 0;
+        $res2 = [];
+        foreach($q as $index => $row)
+        {
+            $res2 = $row;
+            if($row['status'] == 'waiting_approval')
+            {
+                if($index > $last_index_waiting)
+                {
+                    $last_index_waiting = $index;
+                }
+            }
+        }
+
+        $stop_index = max([3, $last_index_waiting]);
+
+        $res = [];
+        $counter = 0;
+        foreach($q as $row)
+        {
+            if($counter >= $stop_index)
+            {
+                break;
+            }
+            $counter++;
+            $res[] = $row;
+        }
+        // for($i = 0; $i < $stop_index; $i++)
+        // {
+        //     $res[] = $q[$i];
+        // }
+
+        return $res;
     }
 }

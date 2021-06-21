@@ -42,7 +42,8 @@ class Admin extends BaseController
             'title' => 'Dashboard | Controling Pallet',
             'sess' => $sess,
             'area' => $area_labels_data,
-            'pie' => $pie_labels_data
+            'pie' => $pie_labels_data,
+            'notifs' => $this->get_notif()
         ];
         return view('admin/index', $data);
     }
@@ -83,6 +84,7 @@ class Admin extends BaseController
             'sess' => $sess,
             'rows' => $rows,
             'is_superadmin' => $is_superadmin,
+            'notifs' => $this->get_notif()
         ];
         return view('admin/inbox', $data);
     }

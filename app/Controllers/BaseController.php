@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\RelPenggunaSite;
+use App\Models\TransactionsModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -82,5 +83,38 @@ class BaseController extends Controller
 			}
 		}
 		return $this->sess;
+	}
+
+	protected function get_notif()
+	{
+		$sess = $this->getsess();
+        if($sess->masuk == 0)
+        {
+            return [];
+        }
+
+        $model = new TransactionsModel();
+
+        $rows = [];
+
+        $data = $sess->data;
+        $is_superadmin = false;
+
+        if($data['tipe'] == 'superadmin')
+        {
+            // $is_superadmin = true;
+			// $rows = $model->all_notif();
+			$rows = $model->get_notif();
+        }
+        else 
+        {
+			// $rows = $model->notif_site($data['id_site']);
+            // $where['id_site_tujuan'] = $sess->data['id_site'];
+			$rows = $model->get_notif($data['id_site']);
+        }
+
+        // $rows = $model->find_many($where);
+
+		return $rows;
 	}
 }

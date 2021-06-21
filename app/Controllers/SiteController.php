@@ -24,6 +24,7 @@ class SiteController extends BaseController
             'title' => 'Master Site | Controlling Pallet',
             'sess' => $sess,
             'rows' => $model->find_many([]),
+            'notifs' => $this->get_notif()
         ];
 
         return view('site/index', $data);

@@ -36,7 +36,8 @@ class transactions extends BaseController
             'title' => 'Transaction | Controling Pallet',
             // 'tampildata' => $transactions->tampildata()->getResult(),
             'sess' => $sess,
-            'rows' => $rows
+            'rows' => $rows,
+            'notifs' => $this->get_notif()
         ];
         // print_r($data);
         // exit();
@@ -62,6 +63,7 @@ class transactions extends BaseController
             'sess' => $sess,
             'list_pallet' => $model_pallet->find_many([]),
             'list_site' => $m_site->find_many([]),
+            'notifs' => $this->get_notif()
         ];
         return view('admin/output', $data);
     }
@@ -83,6 +85,7 @@ class transactions extends BaseController
             'sess' => $sess,
             'list_pallet' => $model_pallet->find_many([]),
             'list_site' => $m_site->find_many([]),
+            'notifs' => $this->get_notif()
         ];
         return view('admin/input', $data);
     }

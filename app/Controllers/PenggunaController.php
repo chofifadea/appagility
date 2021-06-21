@@ -28,6 +28,7 @@ class PenggunaController extends BaseController
             'sess' => $sess,
             'rows' => $model->find_many(['_.tipe' => 'admin-gudang']),
             'list_site' => $m_site->find_many(['_.tipe' => 'warehouse']),
+            'notifs' => $this->get_notif()
         ];
 
         return view('pengguna/index', $data);
