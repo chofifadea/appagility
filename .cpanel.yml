@@ -3,3 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/investop/public_html/
     - /bin/cp * $DEPLOYPATH
+    - /bin/cp app $DEPLOYPATH
+    - /bin/cp db $DEPLOYPATH
+    - /bin/cp public $DEPLOYPATH
+    - /bin/cp test $DEPLOYPATH
+    - /bin/cp writable $DEPLOYPATH
