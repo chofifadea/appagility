@@ -69,7 +69,7 @@
 
     <!-- Nav Item - Output -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/transactions/output'); ?>">
+        <a class="nav-link" href="<?= base_url('/output'); ?>">
             <i class="fas fa-shipping-fast"></i>
             <span>Output</span></a>
     </li>
@@ -79,7 +79,7 @@
 
     <!-- Nav Item - Input -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('transactions/input'); ?>">
+        <a class="nav-link" href="<?= base_url('input'); ?>">
             <i class="fas fa-layer-group"></i>
             <span>Input</span></a>
     </li>
