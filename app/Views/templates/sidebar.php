@@ -106,7 +106,7 @@
     <hr class="sidebar-divider d-none d-md-block">
     <!-- Nav Item - User Guide -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('/transactions'); ?>">
+        <a class="nav-link" href="<?= base_url('/user-guide'); ?>">
             <i class="far fa-question-circle"></i>
             <span>User Guide</span></a>
     </li>

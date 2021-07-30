@@ -75,6 +75,8 @@ $routes->get('/output', 'transactions::output');
 $routes->post('/output', 'transactions::create_output');
 // $routes->post('transactions-output', 'transactions::simpandataoutput');
 
+$routes->get('/user-guide', 'UserGuideController::index');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
