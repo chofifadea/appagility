@@ -28,6 +28,7 @@
                             <th>From Site</th>
                             <th>To Site</th>
                             <th>Quantity</th>
+                            <th>Transport</th>
                             <th>Created By</th>
                             <th>Created At</th>
                             <th>Approved By</th>
@@ -44,6 +45,7 @@
                                 <td><?= $row['nama_site_asal'] ?></td>
                                 <td><?= $row['nama_site_tujuan'] ?></td>
                                 <td><?= $row['quantity'] ?></td>
+                                <td><?= $row['nama_driver'] . ' - ' . $row['no_plat_mobil'] ?></td>
                                 <td><?= $row['nama_creator'] ?></td>
                                 <td><?= $row['created_at'] ?></td>
                                 <td><?= $row['nama_approver'] ?></td>

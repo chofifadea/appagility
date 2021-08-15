@@ -127,7 +127,7 @@ class transactions extends BaseController
             'sess' => $sess,
             'list_pallet' => $model_pallet->find_many([]),
             'list_site' => $m_site->find_many([]),
-            'notifs' => $this->get_notif()
+            'notifs' => $this->get_notif(),
         ];
         return view('admin/output', $data);
     }
@@ -173,7 +173,9 @@ class transactions extends BaseController
             'information' => $this->request->getPost('information'),
             'created_by' => $sess->data['id'],
             'status' => 'waiting_approval',
-            'created_at' => $tgl_trans . ' ' . $jam
+            'created_at' => $tgl_trans . ' ' . $jam,
+            'nama_driver' => $this->request->getPost('nama_driver'),
+            'no_plat_mobil' => $this->request->getPost('no_plat_mobil'),
         ];
 
         if($sess->data['tipe'] == 'superadmin')
@@ -246,6 +248,8 @@ class transactions extends BaseController
             'approved_by' => $sess->data['id'],
             'approved_at' => $skrg,
             'id_site_asal' => $this->request->getPost('from_site'),
+            'nama_driver' => $this->request->getPost('nama_driver'),
+            'no_plat_mobil' => $this->request->getPost('no_plat_mobil'),
         ];
 
         if($sess->data['tipe'] == 'superadmin')

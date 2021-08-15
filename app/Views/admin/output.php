@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-10">
                 <label for="quantity" class="form-label">Jumlah</label>
-                <input type="number" class="form-control <?= ($validation->hasError('quantity')) ? 'is-invalid' : ''; ?>" id="quantity" name="quantity">
+                <input type="number" class="form-control <?= ($validation->hasError('quantity')) ? 'is-invalid' : ''; ?>" id="quantity" name="quantity" placeholder="Qty Keluar">
                 <div class="invalid-feedback" for='quantity'>
                     <?= $validation->getError('quantity'); ?>
                 </div>
@@ -59,15 +59,29 @@
                 </div>
             </div>
             <div class="col-10">
+                <label for="information" class="form-label">Nama Driver</label>
+                <input type="text" class="form-control <?= ($validation->hasError('information')) ? 'is-invalid' : ''; ?>" id="nama_driver" placeholder="Nama Driver" name="nama_driver">
+                <div class="invalid-feedback" for='nama_driver'>
+                    <?= $validation->getError('nama_driver'); ?>
+                </div>
+            </div>
+            <div class="col-10">
+                <label for="information" class="form-label">Nomor Plat Mobil</label>
+                <input type="text" class="form-control <?= ($validation->hasError('no_plat_mobil')) ? 'is-invalid' : ''; ?>" id="no_plat_mobil" placeholder="Nomor Plat Mobil" name="no_plat_mobil">
+                <div class="invalid-feedback" for='no_plat_mobil'>
+                    <?= $validation->getError('no_plat_mobil'); ?>
+                </div>
+            </div>
+            <div class="col-10">
                 <label for="information" class="form-label">Keterangan</label>
-                <input type="text" class="form-control <?= ($validation->hasError('information')) ? 'is-invalid' : ''; ?>" id="information" placeholder="" name="information">
+                <input type="text" class="form-control <?= ($validation->hasError('information')) ? 'is-invalid' : ''; ?>" id="information" placeholder="Keterangan" name="information">
                 <div class="invalid-feedback" for='information'>
                     <?= $validation->getError('information'); ?>
                 </div>
             </div>
             <div class="col-10">
                 <label for="tgl" class="form-label">Tanggal</label>
-                <input type="date" class="form-control id="tgl" placeholder="" name="tgl">
+                <input type="date" class="form-control id="tgl" placeholder="Tanggal Transaksi" name="tgl">
                 <div class="invalid-feedback" for='tgl'>
                     <?= $validation->getError('tgl'); ?>
                 </div>
