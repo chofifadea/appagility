@@ -57,7 +57,10 @@ class AuthController extends BaseController
 			else 
 			{
 				$this->response->setStatusCode(404);
-				echo json_encode(['fields' => ['username' => 'Username tidak ditemukan']]);
+				echo json_encode([
+					'fields' => ['username' => 'Username tidak ditemukannn'],
+					'username' => $username,
+				]);
 			}
 		}
 		// user dicari ditemukan

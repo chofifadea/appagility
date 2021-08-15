@@ -44,6 +44,70 @@ class transactions extends BaseController
         return view('admin/transaction', $data);
     }
 
+    public function transactions_site()
+    {
+        $sess = $this->getsess();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
+        $transactions = new TransactionsModel();
+
+        $rows = [];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+            $rows = $transactions->all_site_transactions();
+        }
+        else 
+        {
+            $id_site = $sess->data['id_site'];
+            $rows = $transactions->site_transactions($id_site);
+        }
+
+        $data = [
+            'title' => 'Site Transaction | Controling Pallet',
+            'page_title' => 'Site Transactions',
+            'sess' => $sess,
+            'rows' => $rows,
+            'notifs' => $this->get_notif()
+        ];
+        return view('admin/transaction', $data);
+    }
+
+    public function transactions_vendor()
+    {
+        $sess = $this->getsess();
+        if($sess->masuk == 0)
+        {
+            return redirect()->to(base_url());
+        }
+
+        $transactions = new TransactionsModel();
+
+        $rows = [];
+
+        if($sess->data['tipe'] == 'superadmin')
+        {
+            $rows = $transactions->all_vendor_transactions();
+        }
+        else 
+        {
+            $id_site = $sess->data['id_site'];
+            $rows = $transactions->vendor_transactions($id_site);
+        }
+
+        $data = [
+            'title' => 'Vendor Transactions | Controling Pallet',
+            'page_title' => 'Vendor Transactions',
+            'sess' => $sess,
+            'rows' => $rows,
+            'notifs' => $this->get_notif()
+        ];
+        return view('admin/transaction', $data);
+    }
+
     public function output()
     {
         $sess = $this->getsess();

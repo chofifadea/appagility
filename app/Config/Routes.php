@@ -67,6 +67,8 @@ $routes->post('/inbox/reject', 'Admin::reject_inbox');
 $routes->get('/dashboard', 'Admin::index');
 // CRUD Transactions 
 $routes->get('transactions', 'transactions::index');
+$routes->get('/transactions-site', 'transactions::transactions_site');
+$routes->get('/transactions-vendor', 'transactions::transactions_vendor');
 // $routes->post('transactions-save', 'transactions::save');
 $routes->get('/input', 'transactions::input');
 $routes->post('/input', 'transactions::create_input');

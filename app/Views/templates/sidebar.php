@@ -88,10 +88,24 @@
     <hr class="sidebar-divider">
 
     <!-- Nav Item - Transaction -->
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="<?= base_url('/transactions'); ?>">
             <i class="fas fa-fw fa-table"></i>
             <span>Transaction</span></a>
+    </li> -->
+
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/transactions-site'); ?>">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Site Transaction</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('/transactions-vendor'); ?>">
+            <i class="fas fa-fw fa-box"></i>
+            <span>Vendor Transaction</span></a>
     </li>
 
     <!-- Divider -->

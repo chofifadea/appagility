@@ -61,6 +61,74 @@ class TransactionsModel extends CrudModel
             ]);
     }
 
+    public function all_site_transactions()
+    {
+        $q = $this->base_query()
+            ->groupStart()
+                ->where([
+                    'from_site.tipe' => 'warehouse',
+                    'to_site.tipe' => 'warehouse',
+                ])
+            ->groupEnd()
+            ->get()
+            ->getResultArray();
+        return $q;
+    }
+
+    public function all_vendor_transactions()
+    {
+        $q = $this->base_query()
+            ->groupStart()
+                ->where([
+                    'from_site.tipe' => 'vendor',
+                ])
+                ->orWhere([
+                    'to_site.tipe' => 'vendor'
+                ])
+            ->groupEnd()
+            ->get()
+            ->getResultArray();
+        return $q;
+    }
+
+    public function site_transactions($id_site)
+    {
+        $q = $this->base_query()
+            ->groupStart()
+                ->where([
+                    'from_site.tipe' => 'warehouse',
+                    'to_site.tipe' => 'warehouse',
+                ])
+            ->groupEnd()
+            ->groupStart()
+                ->where(['id_site_asal' => $id_site])
+                ->orWhere(['id_site_tujuan' => $id_site])
+            ->groupEnd()
+            ->get()
+            ->getResultArray();
+        return $q;
+    }
+
+    public function vendor_transactions($id_site)
+    {
+        $q = $this->base_query()
+            ->groupStart()
+                ->where([
+                    'from_site.tipe' => 'vendor',
+                ])
+                ->orWhere([
+                    'to_site.tipe' => 'vendor'
+                ])
+            ->groupEnd()
+            ->groupStart()
+                ->where(['id_site_asal' => $id_site])
+                ->orWhere(['id_site_tujuan' => $id_site])
+            ->groupEnd()
+            ->get()
+            ->getResultArray();
+        return $q;
+    }
+
     public function data_in_site($id_wh)
     {
         $q = $this->base_query()
